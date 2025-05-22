@@ -287,7 +287,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.guna2CustomGradientPanel1);
             this.Controls.Add(this.guna2ButtonEnviar);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";

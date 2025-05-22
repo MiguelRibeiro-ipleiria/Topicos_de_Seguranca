@@ -134,19 +134,18 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (form2Ref != null)
-            {
-                form2Ref.Close();
-            }
-            this.Close();
-            Application.Exit();
+            CloseClient();
+            Form2 novoForm = new Form2();
+            novoForm.Show();
+            Close();
         }
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            CloseClient();
             Form2 novoForm = new Form2();
             novoForm.Show();
+            Close();
         }
 
         private void guna2ButtonEnviar_Click(object sender, EventArgs e)
@@ -167,6 +166,18 @@ namespace WindowsFormsApp1
                 string resposta = protocolSI.GetStringFromData();
                 textBoxInformacai.AppendText(resposta);
             }
+        }
+
+
+        private void CloseClient()
+        {
+            //Vou enviar o EOT para o servidor
+            byte[] EOT = protocolSI.Make(ProtocolSICmdType.EOT);
+            networkStream.Write(EOT, 0, EOT.Length);
+            //LER O ACK
+            networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
+            networkStream.Close();
+            client.Close();
         }
     }
 }

@@ -1,22 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\migue\\source\\repos\\Projeto_de_Topicos_PASTAGIT\\Topicos_de_Seguranca\\Topicos_de_Seguranca\\Projeto_De_Topico\\",
+  "WorkspaceRootPath": "C:\\Users\\migue\\source\\repos\\Projeto_pasta_erros_clones\\Pasta1\\Topicos_de_Seguranca\\Projeto_De_Topico\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A9F43F8C-F185-4A63-9A15-5B970ED2EADE}|Server\\Server.csproj|c:\\users\\migue\\source\\repos\\projeto_de_topicos_pastagit\\topicos_de_seguranca\\topicos_de_seguranca\\projeto_de_topico\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F43F8C-F185-4A63-9A15-5B970ED2EADE}|Server\\Server.csproj|solutionrelative:server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{227BC848-6A3F-4975-A4F1-98A9B854E622}|WindowsFormsApp1\\Cliente.csproj|c:\\users\\migue\\source\\repos\\projeto_pasta_erros_clones\\pasta1\\topicos_de_seguranca\\projeto_de_topico\\windowsformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{227BC848-6A3F-4975-A4F1-98A9B854E622}|WindowsFormsApp1\\Cliente.csproj|solutionrelative:windowsformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{227BC848-6A3F-4975-A4F1-98A9B854E622}|WindowsFormsApp1\\Cliente.csproj|C:\\Users\\migue\\source\\repos\\Projeto_de_Topicos_PASTAGIT\\Topicos_de_Seguranca\\Topicos_de_Seguranca\\Projeto_De_Topico\\windowsformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{227BC848-6A3F-4975-A4F1-98A9B854E622}|WindowsFormsApp1\\Cliente.csproj|c:\\users\\migue\\source\\repos\\projeto_pasta_erros_clones\\pasta1\\topicos_de_seguranca\\projeto_de_topico\\windowsformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{227BC848-6A3F-4975-A4F1-98A9B854E622}|WindowsFormsApp1\\Cliente.csproj|solutionrelative:windowsformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{227BC848-6A3F-4975-A4F1-98A9B854E622}|WindowsFormsApp1\\WindowsFormsApp1.csproj|C:\\Users\\migue\\source\\repos\\Projeto_de_Topicos_PASTAGIT\\Topicos_de_Seguranca\\Topicos_de_Seguranca\\Projeto_De_Topico\\windowsformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{227BC848-6A3F-4975-A4F1-98A9B854E622}|WindowsFormsApp1\\WindowsFormsApp1.csproj|C:\\Users\\migue\\source\\repos\\Projeto_pasta_erros_clones\\Pasta1\\Topicos_de_Seguranca\\Projeto_De_Topico\\windowsformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{227BC848-6A3F-4975-A4F1-98A9B854E622}|WindowsFormsApp1\\WindowsFormsApp1.csproj|solutionrelative:windowsformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{227BC848-6A3F-4975-A4F1-98A9B854E622}|WindowsFormsApp1\\Cliente.csproj|C:\\Users\\migue\\source\\repos\\Projeto_de_Topicos_PASTAGIT\\Topicos_de_Seguranca\\Topicos_de_Seguranca\\Projeto_De_Topico\\windowsformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{227BC848-6A3F-4975-A4F1-98A9B854E622}|WindowsFormsApp1\\Cliente.csproj|solutionrelative:windowsformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A9F43F8C-F185-4A63-9A15-5B970ED2EADE}|Server\\Server.csproj|C:\\Users\\migue\\source\\repos\\Projeto_pasta_erros_clones\\Pasta1\\Topicos_de_Seguranca\\Projeto_De_Topico\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9F43F8C-F185-4A63-9A15-5B970ED2EADE}|Server\\Server.csproj|solutionrelative:server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,49 +26,51 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\migue\\source\\repos\\Projeto_de_Topicos_PASTAGIT\\Topicos_de_Seguranca\\Topicos_de_Seguranca\\Projeto_De_Topico\\WindowsFormsApp1\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\migue\\source\\repos\\Projeto_pasta_erros_clones\\Pasta1\\Topicos_de_Seguranca\\Projeto_De_Topico\\WindowsFormsApp1\\Form1.cs",
               "RelativeDocumentMoniker": "WindowsFormsApp1\\Form1.cs",
-              "ToolTip": "C:\\Users\\migue\\source\\repos\\exercicios_ajuda_TOPICOS_SEGURANCA\\projeto\\Projeto_GuilhermeFerreira_AndreSantos_MiguelRibeiro\\Projeto_GuilhermeFerreira_AndreSantos_MiguelRibeiro\\WindowsFormsApp1\\Form1.cs [Design]",
-              "RelativeToolTip": "..\\..\\..\\..\\exercicios_ajuda_TOPICOS_SEGURANCA\\projeto\\Projeto_GuilhermeFerreira_AndreSantos_MiguelRibeiro\\Projeto_GuilhermeFerreira_AndreSantos_MiguelRibeiro\\WindowsFormsApp1\\Form1.cs [Design]",
+              "ToolTip": "C:\\Users\\migue\\source\\repos\\Projeto_pasta_erros_clones\\Pasta1\\Topicos_de_Seguranca\\Projeto_De_Topico\\WindowsFormsApp1\\Form1.cs [Design]",
+              "RelativeToolTip": "WindowsFormsApp1\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T01:07:45.072Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\migue\\source\\repos\\Projeto_de_Topicos_PASTAGIT\\Topicos_de_Seguranca\\Topicos_de_Seguranca\\Projeto_De_Topico\\Server\\Program.cs",
-              "RelativeDocumentMoniker": "Server\\Program.cs",
-              "ToolTip": "C:\\Users\\migue\\source\\repos\\Projeto_de_Topicos_PASTAGIT\\Topicos_de_Seguranca\\Topicos_de_Seguranca\\Projeto_De_Topico\\Server\\Program.cs",
-              "RelativeToolTip": "Server\\Program.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAQwDEAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T01:02:19.332Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-22T17:41:55.348Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\migue\\source\\repos\\Projeto_de_Topicos_PASTAGIT\\Topicos_de_Seguranca\\Topicos_de_Seguranca\\Projeto_De_Topico\\WindowsFormsApp1\\Form1.cs",
-              "RelativeDocumentMoniker": "WindowsFormsApp1\\Form1.cs",
-              "ToolTip": "C:\\Users\\migue\\source\\repos\\Projeto_de_Topicos_PASTAGIT\\Topicos_de_Seguranca\\Topicos_de_Seguranca\\Projeto_De_Topico\\WindowsFormsApp1\\Form1.cs",
-              "RelativeToolTip": "WindowsFormsApp1\\Form1.cs",
-              "ViewState": "AgIAAIEAAAAAAAAAAAA6wKgAAAANAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\migue\\source\\repos\\Projeto_pasta_erros_clones\\Pasta1\\Topicos_de_Seguranca\\Projeto_De_Topico\\Server\\Program.cs",
+              "RelativeDocumentMoniker": "Server\\Program.cs",
+              "ToolTip": "C:\\Users\\migue\\source\\repos\\Projeto_pasta_erros_clones\\Pasta1\\Topicos_de_Seguranca\\Projeto_De_Topico\\Server\\Program.cs",
+              "RelativeToolTip": "Server\\Program.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T01:01:19.031Z"
+              "WhenOpened": "2025-05-22T17:32:20.621Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\migue\\source\\repos\\Projeto_pasta_erros_clones\\Pasta1\\Topicos_de_Seguranca\\Projeto_De_Topico\\WindowsFormsApp1\\Form1.cs",
+              "RelativeDocumentMoniker": "WindowsFormsApp1\\Form1.cs",
+              "ToolTip": "C:\\Users\\migue\\source\\repos\\Projeto_pasta_erros_clones\\Pasta1\\Topicos_de_Seguranca\\Projeto_De_Topico\\WindowsFormsApp1\\Form1.cs",
+              "RelativeToolTip": "WindowsFormsApp1\\Form1.cs",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAAAIwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T17:27:34.66Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\migue\\source\\repos\\Projeto_de_Topicos_PASTAGIT\\Topicos_de_Seguranca\\Topicos_de_Seguranca\\Projeto_De_Topico\\WindowsFormsApp1\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\migue\\source\\repos\\Projeto_pasta_erros_clones\\Pasta1\\Topicos_de_Seguranca\\Projeto_De_Topico\\WindowsFormsApp1\\Form1.cs",
               "RelativeDocumentMoniker": "WindowsFormsApp1\\Form1.cs",
               "ToolTip": "C:\\Users\\migue\\source\\repos\\exercicios_ajuda_TOPICOS_SEGURANCA\\projeto\\Projeto_GuilhermeFerreira_AndreSantos_MiguelRibeiro\\WindowsFormsApp1\\Form1.cs [Design]",
               "RelativeToolTip": "..\\..\\..\\..\\exercicios_ajuda_TOPICOS_SEGURANCA\\projeto\\Projeto_GuilhermeFerreira_AndreSantos_MiguelRibeiro\\WindowsFormsApp1\\Form1.cs [Design]",
