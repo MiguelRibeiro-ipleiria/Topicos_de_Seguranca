@@ -157,17 +157,20 @@ namespace WindowsFormsApp1
 
             while (protocolSI.GetCmdType() != ProtocolSICmdType.ACK)
             {
-                networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
+                int bytesRead = networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
+                if (bytesRead > 0)
+                {
+                    if (protocolSI.GetCmdType() == ProtocolSICmdType.DATA)
+                    {
+                        string resposta = protocolSI.GetStringFromData();
+                        textBoxInformacao.AppendText(resposta + Environment.NewLine);
+                    }
+                }
+
+
             }
 
-            networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
-            if (protocolSI.GetCmdType() == ProtocolSICmdType.DATA)
-            {
-                string resposta = protocolSI.GetStringFromData();
-                textBoxInformacai.AppendText(resposta);
-            }
         }
-
 
         private void CloseClient()
         {

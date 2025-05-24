@@ -24,3 +24,16 @@ C:\Users\migue\source\repos\Projeto_pasta_erros_clones\Pasta1\Topicos_de_Seguran
 C:\Users\migue\source\repos\Projeto_pasta_erros_clones\Pasta1\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\migue\source\repos\Projeto_pasta_erros_clones\Pasta1\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
 C:\Users\migue\source\repos\Projeto_pasta_erros_clones\Pasta1\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\bin\Debug\Guna.UI2.dll
+C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\obj\Debug\Cliente.csproj.AssemblyReference.cache
+C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form2.resources
+C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\obj\Debug\Cliente.csproj.GenerateResource.cache
+C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\obj\Debug\Cliente.csproj.CoreCompileInputs.cache
+C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\obj\Debug\Cliente.csproj.Up2Date
+C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
