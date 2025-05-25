@@ -266,5 +266,66 @@ namespace WindowsFormsApp1
 
         }
 
+        private void guna2Button3_Click(object sender, EventArgs e)
+        {
+            var popup = new Form()
+            {
+                Width = 400,
+                Height = 230,
+                Text = "Connection Settings",
+                StartPosition = FormStartPosition.CenterParent,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                MaximizeBox = false,
+                MinimizeBox = false
+            };
+
+            // Label
+            var messageLabel = new Label()
+            {
+                Text = "A sua PORT:",
+                TextAlign = ContentAlignment.MiddleCenter,
+                Dock = DockStyle.Top,
+                Height = 40,
+                Font = new Font("Segoe UI", 10, FontStyle.Regular)
+            };
+
+            // TextBox
+            var txtChavePublica = new TextBox()
+            {
+                Multiline = false,
+                Width = 350,
+                Height = 30,
+                Font = new Font("Segoe UI", 10),
+                Text = PORT.ToString()
+            };
+            txtChavePublica.Location = new Point((popup.ClientSize.Width - txtChavePublica.Width) / 2, messageLabel.Bottom + 10);
+
+            var buttonPanel = new FlowLayoutPanel()
+            {
+                FlowDirection = FlowDirection.LeftToRight,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                Anchor = AnchorStyles.None,
+                Padding = new Padding(10),
+                Margin = new Padding(0),
+                Location = new Point((popup.ClientSize.Width - 220) / 2, txtChavePublica.Bottom + 10)
+            };
+            var cancelButton = new Button()
+            {
+                Text = "OK",
+                Width = 90,
+                Height = 35,
+                DialogResult = DialogResult.Cancel
+            };
+
+
+            buttonPanel.Controls.Add(cancelButton);
+            popup.Controls.Add(messageLabel);
+            popup.Controls.Add(txtChavePublica);
+            popup.Controls.Add(buttonPanel);
+            popup.CancelButton = cancelButton;
+
+            popup.ShowDialog();
+        }
     }
 }

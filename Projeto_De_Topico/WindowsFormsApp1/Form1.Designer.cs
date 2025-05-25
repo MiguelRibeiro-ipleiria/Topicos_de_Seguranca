@@ -139,11 +139,13 @@
             // 
             // textBoxInformacao
             // 
-            this.textBoxInformacao.Location = new System.Drawing.Point(59, 47);
+            this.textBoxInformacao.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxInformacao.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxInformacao.Location = new System.Drawing.Point(4, 4);
             this.textBoxInformacao.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxInformacao.Multiline = true;
             this.textBoxInformacao.Name = "textBoxInformacao";
-            this.textBoxInformacao.Size = new System.Drawing.Size(507, 238);
+            this.textBoxInformacao.Size = new System.Drawing.Size(748, 357);
             this.textBoxInformacao.TabIndex = 0;
             // 
             // panel_lateral
@@ -196,6 +198,7 @@
             this.guna2Button3.Size = new System.Drawing.Size(195, 49);
             this.guna2Button3.TabIndex = 30;
             this.guna2Button3.Text = "Connection";
+            this.guna2Button3.Click += new System.EventHandler(this.guna2Button3_Click);
             // 
             // guna2Button2
             // 
