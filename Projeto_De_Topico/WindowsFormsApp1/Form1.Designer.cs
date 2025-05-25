@@ -39,7 +39,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.textBoxInformacao = new System.Windows.Forms.TextBox();
             this.panel_lateral = new System.Windows.Forms.Panel();
-            this.guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
+            this.ButaoCifrarMenu = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -65,7 +65,7 @@
             this.guna2CustomGradientPanel1.Controls.Add(this.textboxchat);
             this.guna2CustomGradientPanel1.ForeColor = System.Drawing.Color.White;
             this.guna2CustomGradientPanel1.Location = new System.Drawing.Point(260, 497);
-            this.guna2CustomGradientPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2CustomGradientPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(641, 46);
             this.guna2CustomGradientPanel1.TabIndex = 15;
@@ -78,7 +78,7 @@
             this.textboxchat.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textboxchat.ForeColor = System.Drawing.Color.DimGray;
             this.textboxchat.Location = new System.Drawing.Point(4, 11);
-            this.textboxchat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textboxchat.Margin = new System.Windows.Forms.Padding(4);
             this.textboxchat.Multiline = true;
             this.textboxchat.Name = "textboxchat";
             this.textboxchat.Size = new System.Drawing.Size(633, 31);
@@ -97,7 +97,7 @@
             this.guna2CustomGradientPanel2.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(70)))), ((int)(((byte)(82)))));
             this.guna2CustomGradientPanel2.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(70)))), ((int)(((byte)(82)))));
             this.guna2CustomGradientPanel2.Location = new System.Drawing.Point(252, 60);
-            this.guna2CustomGradientPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2CustomGradientPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
             this.guna2CustomGradientPanel2.Size = new System.Drawing.Size(748, 70);
             this.guna2CustomGradientPanel2.TabIndex = 0;
@@ -108,7 +108,7 @@
             this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox2.Location = new System.Drawing.Point(672, 10);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(72, 57);
             this.pictureBox2.TabIndex = 1;
@@ -132,7 +132,7 @@
             this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.Controls.Add(this.textBoxInformacao);
             this.panel3.Location = new System.Drawing.Point(248, 128);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(752, 362);
             this.panel3.TabIndex = 17;
@@ -140,7 +140,7 @@
             // textBoxInformacao
             // 
             this.textBoxInformacao.Location = new System.Drawing.Point(59, 47);
-            this.textBoxInformacao.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxInformacao.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxInformacao.Multiline = true;
             this.textBoxInformacao.Name = "textBoxInformacao";
             this.textBoxInformacao.Size = new System.Drawing.Size(507, 238);
@@ -149,33 +149,34 @@
             // panel_lateral
             // 
             this.panel_lateral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(40)))), ((int)(((byte)(49)))));
-            this.panel_lateral.Controls.Add(this.guna2Button4);
+            this.panel_lateral.Controls.Add(this.ButaoCifrarMenu);
             this.panel_lateral.Controls.Add(this.guna2Button3);
             this.panel_lateral.Controls.Add(this.guna2Button2);
             this.panel_lateral.Location = new System.Drawing.Point(-3, 64);
-            this.panel_lateral.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel_lateral.Margin = new System.Windows.Forms.Padding(4);
             this.panel_lateral.Name = "panel_lateral";
             this.panel_lateral.Size = new System.Drawing.Size(255, 496);
             this.panel_lateral.TabIndex = 18;
             // 
-            // guna2Button4
+            // ButaoCifrarMenu
             // 
-            this.guna2Button4.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Button4.BorderRadius = 10;
-            this.guna2Button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.guna2Button4.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button4.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button4.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button4.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button4.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(95)))), ((int)(((byte)(115)))));
-            this.guna2Button4.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2Button4.ForeColor = System.Drawing.Color.White;
-            this.guna2Button4.Location = new System.Drawing.Point(19, 111);
-            this.guna2Button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.guna2Button4.Name = "guna2Button4";
-            this.guna2Button4.Size = new System.Drawing.Size(207, 49);
-            this.guna2Button4.TabIndex = 31;
-            this.guna2Button4.Text = "Cifrar";
+            this.ButaoCifrarMenu.BackColor = System.Drawing.Color.Transparent;
+            this.ButaoCifrarMenu.BorderRadius = 10;
+            this.ButaoCifrarMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ButaoCifrarMenu.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ButaoCifrarMenu.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ButaoCifrarMenu.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ButaoCifrarMenu.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ButaoCifrarMenu.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(95)))), ((int)(((byte)(115)))));
+            this.ButaoCifrarMenu.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ButaoCifrarMenu.ForeColor = System.Drawing.Color.White;
+            this.ButaoCifrarMenu.Location = new System.Drawing.Point(19, 111);
+            this.ButaoCifrarMenu.Margin = new System.Windows.Forms.Padding(4);
+            this.ButaoCifrarMenu.Name = "ButaoCifrarMenu";
+            this.ButaoCifrarMenu.Size = new System.Drawing.Size(207, 49);
+            this.ButaoCifrarMenu.TabIndex = 31;
+            this.ButaoCifrarMenu.Text = "Cifrar";
+            this.ButaoCifrarMenu.Click += new System.EventHandler(this.ButaoCifrarMenu_Click);
             // 
             // guna2Button3
             // 
@@ -190,7 +191,7 @@
             this.guna2Button3.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2Button3.ForeColor = System.Drawing.Color.White;
             this.guna2Button3.Location = new System.Drawing.Point(19, 39);
-            this.guna2Button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Button3.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Button3.Name = "guna2Button3";
             this.guna2Button3.Size = new System.Drawing.Size(195, 49);
             this.guna2Button3.TabIndex = 30;
@@ -209,7 +210,7 @@
             this.guna2Button2.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2Button2.ForeColor = System.Drawing.Color.White;
             this.guna2Button2.Location = new System.Drawing.Point(19, 426);
-            this.guna2Button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Button2.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Button2.Name = "guna2Button2";
             this.guna2Button2.Size = new System.Drawing.Size(195, 49);
             this.guna2Button2.TabIndex = 29;
@@ -223,7 +224,7 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Location = new System.Drawing.Point(-3, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1003, 65);
             this.panel1.TabIndex = 30;
@@ -234,7 +235,7 @@
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox3.Location = new System.Drawing.Point(19, 9);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(55, 44);
             this.pictureBox3.TabIndex = 0;
@@ -264,7 +265,7 @@
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.AliceBlue;
             this.button1.Location = new System.Drawing.Point(940, 7);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(45, 42);
             this.button1.TabIndex = 10;
@@ -285,7 +286,7 @@
             this.guna2ButtonEnviar.ForeColor = System.Drawing.Color.Transparent;
             this.guna2ButtonEnviar.Image = ((System.Drawing.Image)(resources.GetObject("guna2ButtonEnviar.Image")));
             this.guna2ButtonEnviar.Location = new System.Drawing.Point(909, 497);
-            this.guna2ButtonEnviar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2ButtonEnviar.Margin = new System.Windows.Forms.Padding(4);
             this.guna2ButtonEnviar.Name = "guna2ButtonEnviar";
             this.guna2ButtonEnviar.Size = new System.Drawing.Size(73, 49);
             this.guna2ButtonEnviar.TabIndex = 14;
@@ -304,7 +305,7 @@
             this.Controls.Add(this.guna2CustomGradientPanel1);
             this.Controls.Add(this.guna2ButtonEnviar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
@@ -339,7 +340,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
-        private Guna.UI2.WinForms.Guna2Button guna2Button4;
+        private Guna.UI2.WinForms.Guna2Button ButaoCifrarMenu;
         private System.Windows.Forms.TextBox textBoxInformacao;
     }
 }

@@ -16,6 +16,7 @@ namespace Server
         private const int PORT = 10000;
         private static int clientes_counter = 0;
         public static List<ClientHandler> clientes = new List<ClientHandler>();
+        public static readonly object lockObj = new object();
 
         static void Main(string[] args)
         {
@@ -30,9 +31,15 @@ namespace Server
             {
                 TcpClient client = listener.AcceptTcpClient();
                 clientes_counter++;
-                Console.WriteLine("Cliente {0} connected", clientes_counter);
+                Console.WriteLine("Client {0} connected", clientes_counter);
                 ClientHandler clientHandler = new ClientHandler(client, clientes_counter);
-                clientes.Add(clientHandler);
+
+                lock (lockObj)
+                {
+                    clientes.Add(clientHandler);
+                }
+
+
                 clientHandler.Handle();
             }
         }
@@ -71,21 +78,26 @@ namespace Server
                         //ESCREVER MENSAGEM DO CLIENTE
                         string mensagemRecebida = protocoloSI.GetStringFromData();
                         Console.WriteLine("Client " + clientID + ": " + mensagemRecebida);
+
                         ack = protocoloSI.Make(ProtocolSICmdType.ACK);
                         networkStream.Write(ack, 0, ack.Length);
 
                         //RETORNAR A MENSAGEM AO CLIENTE
-                        foreach (var cliente in Program.clientes)
+                        lock (Program.lockObj)
                         {
-                            NetworkStream clientStream = cliente.client.GetStream();
-                            byte[] resposta = protocoloSI.Make(ProtocolSICmdType.DATA, mensagemRecebida);
-                            clientStream.Write(resposta, 0, resposta.Length);
+                            foreach (var clientes in Program.clientes)
+                            {
+                                if (clientes != this)
+                                {
+                                    clientes.MandarMensagem("Cliente " + clientID + ": " + mensagemRecebida);
+                                }
+                            }
                         }
 
                         break;
                     // CASO O CLIENTE ENVIO EOT (FIM DE TRANSMISSAO)
                     case ProtocolSICmdType.EOT:
-                        Console.WriteLine("Ending Thread from Client{0}", clientID);
+                        Console.WriteLine("Ending Thread from Client {0}", clientID);
                         ack = protocoloSI.Make(ProtocolSICmdType.ACK);
                         networkStream.Write(ack, 0, ack.Length);
                         break;
@@ -96,6 +108,21 @@ namespace Server
             networkStream.Close();
             client.Close();
 
+        }
+
+        private void MandarMensagem(string mensagemenviada)
+        {
+            try
+            {
+                ProtocolSI protocolSI = new ProtocolSI();
+                NetworkStream ns = client.GetStream();
+                byte[] packet = protocolSI.Make(ProtocolSICmdType.DATA, mensagemenviada);
+                ns.Write(packet, 0, packet.Length);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao enviar para cliente " + clientID + ": " + ex.Message);
+            }
         }
 
 

@@ -7,11 +7,7 @@
       "RelativeMoniker": "D:0:0:{227BC848-6A3F-4975-A4F1-98A9B854E622}|WindowsFormsApp1\\Cliente.csproj|solutionrelative:windowsformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{227BC848-6A3F-4975-A4F1-98A9B854E622}|WindowsFormsApp1\\Cliente.csproj|c:\\users\\migue\\source\\repos\\projeto_oficial_de_topicos_de_seguranca\\topicos_de_seguranca\\projeto_de_topico\\windowsformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{227BC848-6A3F-4975-A4F1-98A9B854E622}|WindowsFormsApp1\\Cliente.csproj|solutionrelative:windowsformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F43F8C-F185-4A63-9A15-5B970ED2EADE}|Server\\Server.csproj|C:\\Users\\migue\\source\\repos\\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\\Topicos_de_Seguranca\\Projeto_De_Topico\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A9F43F8C-F185-4A63-9A15-5B970ED2EADE}|Server\\Server.csproj|c:\\users\\migue\\source\\repos\\projeto_oficial_de_topicos_de_seguranca\\topicos_de_seguranca\\projeto_de_topico\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A9F43F8C-F185-4A63-9A15-5B970ED2EADE}|Server\\Server.csproj|solutionrelative:server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -22,32 +18,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\migue\\source\\repos\\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\\Topicos_de_Seguranca\\Projeto_De_Topico\\Server\\Program.cs",
               "RelativeDocumentMoniker": "Server\\Program.cs",
               "ToolTip": "C:\\Users\\migue\\source\\repos\\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\\Topicos_de_Seguranca\\Projeto_De_Topico\\Server\\Program.cs",
               "RelativeToolTip": "Server\\Program.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAowEMAAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAowEgAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-22T17:32:20.621Z",
+              "WhenOpened": "2025-05-25T00:24:36.189Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\migue\\source\\repos\\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\\Topicos_de_Seguranca\\Projeto_De_Topico\\WindowsFormsApp1\\Form1.cs",
-              "RelativeDocumentMoniker": "WindowsFormsApp1\\Form1.cs",
-              "ToolTip": "C:\\Users\\migue\\source\\repos\\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\\Topicos_de_Seguranca\\Projeto_De_Topico\\WindowsFormsApp1\\Form1.cs [Design]",
-              "RelativeToolTip": "WindowsFormsApp1\\Form1.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-24T23:07:33.83Z",
-              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
@@ -57,9 +41,9 @@
               "RelativeDocumentMoniker": "WindowsFormsApp1\\Form1.cs",
               "ToolTip": "C:\\Users\\migue\\source\\repos\\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\\Topicos_de_Seguranca\\Projeto_De_Topico\\WindowsFormsApp1\\Form1.cs",
               "RelativeToolTip": "WindowsFormsApp1\\Form1.cs",
-              "ViewState": "AgIAAJgAAAAAAAAAAAAcwK8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAJgAAAAAAAAAAAAWwLAAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-22T17:27:34.66Z",
+              "WhenOpened": "2025-05-25T00:18:20.83Z",
               "EditorCaption": ""
             }
           ]

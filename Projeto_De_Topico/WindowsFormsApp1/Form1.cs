@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -32,9 +33,9 @@ namespace WindowsFormsApp1
             lateral_control();
             form2Ref = form2;
 
-            IPEndPoint endPoint = new IPEndPoint(IPAddress.Loopback, PORT);
+            IPEndPoint endpoint = new IPEndPoint(IPAddress.Loopback, PORT);
             client = new TcpClient();
-            client.Connect(endPoint);
+            client.Connect(endpoint);
             networkStream = client.GetStream();
             protocolSI = new ProtocolSI();
         }
@@ -65,10 +66,10 @@ namespace WindowsFormsApp1
                 guna2Button2.ImageAlign = (HorizontalAlignment)ContentAlignment.MiddleCenter;
                 guna2Button3.ImageSize = new Size(40, 40);
 
-                guna2Button4.Text = "";
-                guna2Button4.Image = WindowsFormsApp1.Properties.Resources.chatting;
-                guna2Button4.ImageAlign = (HorizontalAlignment)ContentAlignment.MiddleCenter;
-                guna2Button4.ImageSize = new Size(40, 40);
+                ButaoCifrarMenu.Text = "";
+                ButaoCifrarMenu.Image = WindowsFormsApp1.Properties.Resources.chatting;
+                ButaoCifrarMenu.ImageAlign = (HorizontalAlignment)ContentAlignment.MiddleCenter;
+                ButaoCifrarMenu.ImageSize = new Size(40, 40);
 
                 guna2Button2.Size = new Size(41, 40);
                 guna2Button2.Location = new Point(14, 349);
@@ -76,8 +77,8 @@ namespace WindowsFormsApp1
                 guna2Button3.Size = new Size(41, 40);
                 guna2Button3.Location = new Point(14, 29);
 
-                guna2Button4.Size = new Size(41, 40);
-                guna2Button4.Location = new Point(14, 90);
+                ButaoCifrarMenu.Size = new Size(41, 40);
+                ButaoCifrarMenu.Location = new Point(14, 90);
 
                 lateraloff = false;
             }
@@ -107,11 +108,11 @@ namespace WindowsFormsApp1
                 guna2Button3.TextAlign = (HorizontalAlignment)ContentAlignment.MiddleRight;
                 guna2Button3.ImageSize = new Size(39, 39);
 
-                guna2Button4.Text = "     Cifrar";
-                guna2Button4.Image = WindowsFormsApp1.Properties.Resources.chatting;
-                guna2Button4.ImageAlign = (HorizontalAlignment)ContentAlignment.MiddleLeft;
-                guna2Button4.TextAlign = (HorizontalAlignment)ContentAlignment.MiddleRight;
-                guna2Button4.ImageSize = new Size(39, 39);
+                ButaoCifrarMenu.Text = "     Cifrar";
+                ButaoCifrarMenu.Image = WindowsFormsApp1.Properties.Resources.chatting;
+                ButaoCifrarMenu.ImageAlign = (HorizontalAlignment)ContentAlignment.MiddleLeft;
+                ButaoCifrarMenu.TextAlign = (HorizontalAlignment)ContentAlignment.MiddleRight;
+                ButaoCifrarMenu.ImageSize = new Size(39, 39);
 
                 guna2Button2.Size = new Size(146, 40);
                 guna2Button2.Location = new Point(14, 349);
@@ -119,8 +120,8 @@ namespace WindowsFormsApp1
                 guna2Button3.Size = new Size(155, 40);
                 guna2Button3.Location = new Point(14, 29);
 
-                guna2Button4.Size = new Size(155, 40);
-                guna2Button4.Location = new Point(14, 90);
+                ButaoCifrarMenu.Size = new Size(155, 40);
+                ButaoCifrarMenu.Location = new Point(14, 90);
 
                 lateraloff = true;
             }
@@ -152,24 +153,29 @@ namespace WindowsFormsApp1
         {
             string msg = textboxchat.Text;
             textboxchat.Clear();
+
+            textBoxInformacao.AppendText("Tu: " + msg + Environment.NewLine);
+
+
+
+
+            //enviar mensagem
             byte[] packet = protocolSI.Make(ProtocolSICmdType.DATA, msg);
             networkStream.Write(packet, 0, packet.Length);
 
-            while (protocolSI.GetCmdType() != ProtocolSICmdType.ACK)
+            ProtocolSICmdType cmd;
+            do
             {
-                int bytesRead = networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
-                if (bytesRead > 0)
-                {
-                    if (protocolSI.GetCmdType() == ProtocolSICmdType.DATA)
-                    {
-                        string resposta = protocolSI.GetStringFromData();
-                        textBoxInformacao.AppendText(resposta + Environment.NewLine);
-                    }
-                }
+                networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
+                cmd = protocolSI.GetCmdType();
+            } while (cmd != ProtocolSICmdType.ACK);
 
-
+            networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
+            if (protocolSI.GetCmdType() == ProtocolSICmdType.DATA)
+            {
+                string response = protocolSI.GetStringFromData();
+                textBoxInformacao.AppendText(response + Environment.NewLine);
             }
-
         }
 
         private void CloseClient()
@@ -182,5 +188,83 @@ namespace WindowsFormsApp1
             networkStream.Close();
             client.Close();
         }
+
+        private void ButaoCifrarMenu_Click(object sender, EventArgs e)
+        {
+            var popup = new Form()
+            {
+                Width = 400,
+                Height = 230,
+                Text = "Cifragem",
+                StartPosition = FormStartPosition.CenterParent,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                MaximizeBox = false,
+                MinimizeBox = false
+            };
+
+            // Label
+            var messageLabel = new Label()
+            {
+                Text = "Indique a sua pública",
+                TextAlign = ContentAlignment.MiddleCenter,
+                Dock = DockStyle.Top,
+                Height = 40,
+                Font = new Font("Segoe UI", 10, FontStyle.Regular)
+            };
+
+            // TextBox
+            var txtChavePublica = new TextBox()
+            {
+                Multiline = true,
+                Width = 350,
+                Height = 60,
+                Font = new Font("Segoe UI", 10),
+            };
+            txtChavePublica.Location = new Point((popup.ClientSize.Width - txtChavePublica.Width) / 2, messageLabel.Bottom + 10);
+
+            var buttonPanel = new FlowLayoutPanel()
+            {
+                FlowDirection = FlowDirection.LeftToRight,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                Anchor = AnchorStyles.None,
+                Padding = new Padding(10),
+                Margin = new Padding(0),
+                Location = new Point((popup.ClientSize.Width - 220) / 2, txtChavePublica.Bottom + 10)
+            };
+
+            var confirmButton = new Button()
+            {
+                Text = "Confirmar",
+                Width = 90,
+                Height = 35,
+                DialogResult = DialogResult.OK
+            };
+
+            var cancelButton = new Button()
+            {
+                Text = "Cancelar",
+                Width = 90,
+                Height = 35,
+                DialogResult = DialogResult.Cancel
+            };
+
+            if (popup.ShowDialog() == DialogResult.OK)
+            {
+                //executar função de cifragem
+            }
+
+            buttonPanel.Controls.Add(confirmButton);
+            buttonPanel.Controls.Add(cancelButton);
+            popup.Controls.Add(messageLabel);
+            popup.Controls.Add(txtChavePublica);
+            popup.Controls.Add(buttonPanel);
+            popup.AcceptButton = confirmButton;
+            popup.CancelButton = cancelButton;
+
+            popup.ShowDialog();
+
+        }
+
     }
 }
