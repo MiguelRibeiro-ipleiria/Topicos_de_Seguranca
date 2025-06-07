@@ -1,11 +1,13 @@
 ﻿using EI.SI;
 using System;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
@@ -18,6 +20,8 @@ namespace WindowsFormsApp1
         private const int PORT = 10000;
 
         private RSACryptoServiceProvider rsa;
+        private AesCryptoServiceProvider aes;
+
 
         private string ChaveSimetrica;
 
@@ -29,7 +33,11 @@ namespace WindowsFormsApp1
         public Form2()
         {
             InitializeComponent();
+            label_ErroLogin.Visible = false;
+
             rsa = new RSACryptoServiceProvider();
+            AesCryptoServiceProvider aes;
+
             IPEndPoint endpoint = new IPEndPoint(IPAddress.Loopback, PORT);
             protocolSI = new ProtocolSI();
             client = new TcpClient();
@@ -44,6 +52,10 @@ namespace WindowsFormsApp1
             string pass = textBoxPass.Text;
             string username = textBoxUser.Text;
 
+
+
+
+
             byte[] packet = protocolSI.Make(ProtocolSICmdType.USER_OPTION_2, username + "+" + pass);
             networkStream.Write(packet, 0, packet.Length);
 
@@ -53,10 +65,11 @@ namespace WindowsFormsApp1
                 if(protocolSI.GetStringFromData() == "validado")
                 {
                     MessageBox.Show("Logado Com Sucesso");
+                    label_ErroLogin.Visible = false;
                 }
                 else if(protocolSI.GetStringFromData() == "erro")
                 {
-                    MessageBox.Show("Errado Com Sucesso");
+                    label_ErroLogin.Visible = true;
                 }
             }
 
@@ -120,6 +133,33 @@ namespace WindowsFormsApp1
             {
                 ChaveSimetrica = protocolSI.GetStringFromData();
             }
+        }
+
+        private string CifrarTexto(string TextoACifrar)
+        {
+            //Texto ara guardar o texto decifrado em Bytes
+            byte[] txtDecifrado = Encoding.UTF8.GetBytes(TextoACifrar);
+
+            //Texto ara guardar o cifrado em bytes
+            byte[] txtCifrado;
+
+            //Reservar espaço na memoria para colocar o texto e cifrá-lo
+            MemoryStream ms = new MemoryStream();
+            //Inicializa o sistema de cifragem (Write)
+            CryptoStream cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write);
+            //Cifrar os dados
+            cs.Write(txtDecifrado, 0, txtDecifrado.Length);
+            cs.Close();
+
+            //Guardar os dados cifrado que estão na memória
+            txtCifrado = ms.ToArray();
+
+            //Converter os dados para base64 (texto)
+            string txtCifradoB64 = Convert.ToBase64String(txtCifrado);
+
+            //Devolver os bytes em base64
+            return txtCifradoB64;
+
         }
 
     }

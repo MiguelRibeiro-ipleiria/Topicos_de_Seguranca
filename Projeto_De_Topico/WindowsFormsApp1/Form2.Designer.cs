@@ -44,6 +44,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button_registro = new System.Windows.Forms.Button();
+            this.label_ErroLogin = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Limpar_Dados
@@ -52,10 +53,9 @@
             this.Limpar_Dados.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Limpar_Dados.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Limpar_Dados.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(40)))), ((int)(((byte)(49)))));
-            this.Limpar_Dados.Location = new System.Drawing.Point(347, 496);
-            this.Limpar_Dados.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Limpar_Dados.Location = new System.Drawing.Point(260, 403);
             this.Limpar_Dados.Name = "Limpar_Dados";
-            this.Limpar_Dados.Size = new System.Drawing.Size(132, 30);
+            this.Limpar_Dados.Size = new System.Drawing.Size(101, 23);
             this.Limpar_Dados.TabIndex = 6;
             this.Limpar_Dados.Text = "Limpar dados";
             this.Limpar_Dados.Click += new System.EventHandler(this.Limpar_Dados_Click);
@@ -66,29 +66,26 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(40)))), ((int)(((byte)(49)))));
-            this.label3.Location = new System.Drawing.Point(211, 207);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(158, 168);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(145, 46);
+            this.label3.Size = new System.Drawing.Size(116, 37);
             this.label3.TabIndex = 1;
             this.label3.Text = "LOGIN";
             // 
             // panel8
             // 
             this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(40)))), ((int)(((byte)(49)))));
-            this.panel8.Location = new System.Drawing.Point(-1, 722);
-            this.panel8.Margin = new System.Windows.Forms.Padding(4);
+            this.panel8.Location = new System.Drawing.Point(-1, 587);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(587, 14);
+            this.panel8.Size = new System.Drawing.Size(440, 11);
             this.panel8.TabIndex = 7;
             // 
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(40)))), ((int)(((byte)(49)))));
             this.panel9.Location = new System.Drawing.Point(-1, -2);
-            this.panel9.Margin = new System.Windows.Forms.Padding(4);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(587, 16);
+            this.panel9.Size = new System.Drawing.Size(440, 13);
             this.panel9.TabIndex = 8;
             // 
             // button1
@@ -97,10 +94,9 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(88, 528);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Location = new System.Drawing.Point(66, 429);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(393, 62);
+            this.button1.Size = new System.Drawing.Size(295, 50);
             this.button1.TabIndex = 9;
             this.button1.Text = "LOGIN";
             this.button1.UseVisualStyleBackColor = false;
@@ -112,10 +108,9 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(40)))), ((int)(((byte)(49)))));
-            this.button2.Location = new System.Drawing.Point(539, 22);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Location = new System.Drawing.Point(404, 18);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(31, 32);
+            this.button2.Size = new System.Drawing.Size(23, 26);
             this.button2.TabIndex = 10;
             this.button2.Text = "X";
             this.button2.UseVisualStyleBackColor = false;
@@ -125,20 +120,18 @@
             // 
             this.panel7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel7.BackgroundImage")));
             this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel7.Location = new System.Drawing.Point(88, 41);
-            this.panel7.Margin = new System.Windows.Forms.Padding(4);
+            this.panel7.Location = new System.Drawing.Point(66, 33);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(393, 140);
+            this.panel7.Size = new System.Drawing.Size(295, 114);
             this.panel7.TabIndex = 3;
             // 
             // HidePass
             // 
             this.HidePass.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("HidePass.BackgroundImage")));
             this.HidePass.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.HidePass.Location = new System.Drawing.Point(440, 401);
-            this.HidePass.Margin = new System.Windows.Forms.Padding(4);
+            this.HidePass.Location = new System.Drawing.Point(330, 326);
             this.HidePass.Name = "HidePass";
-            this.HidePass.Size = new System.Drawing.Size(35, 36);
+            this.HidePass.Size = new System.Drawing.Size(26, 29);
             this.HidePass.TabIndex = 15;
             this.HidePass.Click += new System.EventHandler(this.HidePass_Click);
             // 
@@ -147,12 +140,11 @@
             this.textBoxPass.BackColor = System.Drawing.SystemColors.Control;
             this.textBoxPass.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxPass.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxPass.Location = new System.Drawing.Point(160, 401);
-            this.textBoxPass.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxPass.Location = new System.Drawing.Point(120, 326);
             this.textBoxPass.Multiline = true;
             this.textBoxPass.Name = "textBoxPass";
             this.textBoxPass.PasswordChar = '*';
-            this.textBoxPass.Size = new System.Drawing.Size(272, 41);
+            this.textBoxPass.Size = new System.Drawing.Size(204, 33);
             this.textBoxPass.TabIndex = 19;
             // 
             // textBoxUser
@@ -160,49 +152,44 @@
             this.textBoxUser.BackColor = System.Drawing.SystemColors.Control;
             this.textBoxUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxUser.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxUser.Location = new System.Drawing.Point(161, 295);
-            this.textBoxUser.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxUser.Location = new System.Drawing.Point(121, 240);
             this.textBoxUser.Multiline = true;
             this.textBoxUser.Name = "textBoxUser";
-            this.textBoxUser.Size = new System.Drawing.Size(325, 41);
+            this.textBoxUser.Size = new System.Drawing.Size(244, 33);
             this.textBoxUser.TabIndex = 18;
             // 
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(40)))), ((int)(((byte)(49)))));
-            this.panel6.Location = new System.Drawing.Point(95, 444);
-            this.panel6.Margin = new System.Windows.Forms.Padding(4);
+            this.panel6.Location = new System.Drawing.Point(71, 361);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(392, 1);
+            this.panel6.Size = new System.Drawing.Size(294, 1);
             this.panel6.TabIndex = 17;
             // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(40)))), ((int)(((byte)(49)))));
-            this.panel5.Location = new System.Drawing.Point(95, 343);
-            this.panel5.Margin = new System.Windows.Forms.Padding(4);
+            this.panel5.Location = new System.Drawing.Point(71, 279);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(392, 1);
+            this.panel5.Size = new System.Drawing.Size(294, 1);
             this.panel5.TabIndex = 16;
             // 
             // panel4
             // 
             this.panel4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel4.BackgroundImage")));
             this.panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel4.Location = new System.Drawing.Point(95, 388);
-            this.panel4.Margin = new System.Windows.Forms.Padding(4);
+            this.panel4.Location = new System.Drawing.Point(71, 315);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(57, 49);
+            this.panel4.Size = new System.Drawing.Size(43, 40);
             this.panel4.TabIndex = 14;
             // 
             // panel3
             // 
             this.panel3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel3.BackgroundImage")));
             this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel3.Location = new System.Drawing.Point(95, 287);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4);
+            this.panel3.Location = new System.Drawing.Point(71, 233);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(57, 49);
+            this.panel3.Size = new System.Drawing.Size(43, 40);
             this.panel3.TabIndex = 13;
             // 
             // button_registro
@@ -211,21 +198,33 @@
             this.button_registro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_registro.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_registro.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(40)))), ((int)(((byte)(49)))));
-            this.button_registro.Location = new System.Drawing.Point(88, 598);
-            this.button_registro.Margin = new System.Windows.Forms.Padding(4);
+            this.button_registro.Location = new System.Drawing.Point(66, 486);
             this.button_registro.Name = "button_registro";
-            this.button_registro.Size = new System.Drawing.Size(391, 62);
+            this.button_registro.Size = new System.Drawing.Size(293, 50);
             this.button_registro.TabIndex = 20;
             this.button_registro.Text = "REGISTER";
             this.button_registro.UseVisualStyleBackColor = false;
             this.button_registro.Click += new System.EventHandler(this.button_registro_Click);
             // 
+            // label_ErroLogin
+            // 
+            this.label_ErroLogin.AutoSize = true;
+            this.label_ErroLogin.BackColor = System.Drawing.Color.Transparent;
+            this.label_ErroLogin.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_ErroLogin.ForeColor = System.Drawing.Color.Red;
+            this.label_ErroLogin.Location = new System.Drawing.Point(68, 365);
+            this.label_ErroLogin.Name = "label_ErroLogin";
+            this.label_ErroLogin.Size = new System.Drawing.Size(201, 14);
+            this.label_ErroLogin.TabIndex = 21;
+            this.label_ErroLogin.Text = "Username ou Password Incorretos";
+            // 
             // Form2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(583, 732);
+            this.ClientSize = new System.Drawing.Size(437, 595);
+            this.Controls.Add(this.label_ErroLogin);
             this.Controls.Add(this.button_registro);
             this.Controls.Add(this.HidePass);
             this.Controls.Add(this.textBoxPass);
@@ -242,7 +241,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.Limpar_Dados);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form2";
@@ -267,5 +265,6 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button button_registro;
+        private System.Windows.Forms.Label label_ErroLogin;
     }
 }
