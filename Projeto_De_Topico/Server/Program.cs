@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -16,7 +17,6 @@ namespace Server
     class Program
     {
         private const int PORT = 10000;
-
         private string publickey;
         private static int clientes_counter = 0;
         public static List<ClientHandler> clientes = new List<ClientHandler>();
@@ -60,11 +60,15 @@ namespace Server
         private int clientID;
         private const int SALTSIZE = 8;
         private const int NUMBER_OF_ITERATIONS = 1000;
+        private AesCryptoServiceProvider aes;
+        private string pk;
+        private string iv;
 
         public ClientHandler(TcpClient client, int clientID)
         {
             this.client = client;
             this.clientID = clientID;
+            this.aes = new AesCryptoServiceProvider();
         }
 
         public void Handle()
@@ -118,23 +122,36 @@ namespace Server
                         string publickey = protocoloSI.GetStringFromData();
                         Console.WriteLine("PUBLICKEY :"+ publickey);
 
-                        string pk = GerarChavePrivada(publickey);
+                        pk = GerarChavePrivada(publickey);
+                        iv = GerarIV(publickey);
+                        MandarMensagem(pk + "||" + iv);
 
-                        MandarMensagem(pk);
-
-
-                    break;
+                        break;
 
                     case ProtocolSICmdType.USER_OPTION_1:
 
                         //registro
                         string RegistroUserANDPass = protocoloSI.GetStringFromData();
-                        string[] ArrayRegistro = RegistroUserANDPass.Split('+');
+
+                        //Obter a chave e o IV
+                        string keyB64 = pk;
+                        string ivB64 = iv;
+
+                        aes.Key = Convert.FromBase64String(keyB64);
+                        aes.IV = Convert.FromBase64String(ivB64);
+
+                        Console.WriteLine(RegistroUserANDPass);
+
+                        string RegistroDecifrado = DeCifrarTexto(RegistroUserANDPass);
+                        string[] ArrayRegistro = RegistroDecifrado.Split('+');
 
                         string username = ArrayRegistro[0];
                         string password = ArrayRegistro[1];
                         byte[] salt = GenerateSalt(SALTSIZE);
                         byte[] hash = GenerateSaltedHash(password, salt);
+
+                        Console.WriteLine(username);
+                        Console.WriteLine(password);
 
                         Register(username, hash, salt);
 
@@ -186,6 +203,19 @@ namespace Server
             return pass64;
         }
 
+        private String GerarIV(string pass)
+        {
+            byte[] salt = new byte[] { 7, 8, 8, 8, 2, 5, 9, 5 };
+            Rfc2898DeriveBytes pwgGen = new Rfc2898DeriveBytes(pass, salt, 1000);
+
+            //Gerar um key
+            byte[] iv = pwgGen.GetBytes(16);
+            //Converter para base64
+            string ivB64 = Convert.ToBase64String(iv);
+            //devolver
+            return ivB64;
+        }
+
         private void MandarMensagem(string mensagemenviada)
         {
             try
@@ -206,46 +236,46 @@ namespace Server
             SqlConnection conn = null;
             try
             {
-                // Configurar ligação à Base de Dados
                 conn = new SqlConnection();
                 conn.ConnectionString = String.Format(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='C:\Users\migue\source\repos\Projeto_pasta_erros_clones\Pasta1\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\Database1.mdf';Integrated Security=True");
-
-                // Abrir ligação à Base de Dados
                 conn.Open();
 
-                // Declaração dos parâmetros do comando SQL
-                SqlParameter paramUsername = new SqlParameter("@username", username);
-                SqlParameter paramPassHash = new SqlParameter("@saltedPasswordHash", saltedPasswordHash);
-                SqlParameter paramSalt = new SqlParameter("@salt", salt);
+                // ✅ Verifica se o utilizador já existe
+                string checkUserSql = "SELECT COUNT(*) FROM Users WHERE Username = @username";
+                SqlCommand checkCmd = new SqlCommand(checkUserSql, conn);
+                checkCmd.Parameters.AddWithValue("@username", username);
 
-                // Declaração do comando SQL
-                String sql = "INSERT INTO Users (Username, SaltedPasswordHash, Salt) VALUES (@username,@saltedPasswordHash,@salt)";
+                int userExists = (int)checkCmd.ExecuteScalar();
+                if (userExists > 0)
+                {
+                    Console.WriteLine("Utilizador já existe.");
+                    MandarMensagem("erro: user já existe");
+                    return;
+                }
 
-                // Prepara comando SQL para ser executado na Base de Dados
+                // Se não existe, insere
+                string sql = "INSERT INTO Users (Username, SaltedPasswordHash, Salt) VALUES (@username,@saltedPasswordHash,@salt)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@saltedPasswordHash", saltedPasswordHash);
+                cmd.Parameters.AddWithValue("@salt", salt);
 
-                // Introduzir valores aos parâmentros registados no comando SQL
-                cmd.Parameters.Add(paramUsername);
-                cmd.Parameters.Add(paramPassHash);
-                cmd.Parameters.Add(paramSalt);
-
-                // Executar comando SQL
                 int lines = cmd.ExecuteNonQuery();
-
-                // Fechar ligação
                 conn.Close();
+
                 if (lines == 0)
                 {
-                    // Se forem devolvidas 0 linhas alteradas então o não foi executado com sucesso
-                    throw new Exception("Error while inserting an user");
+                    throw new Exception("Error while inserting user");
                 }
-                //MessageBox.Show("USER INSERIDO COM SUCESSO!");
+
+                MandarMensagem("user inserido com sucesso");
             }
             catch (Exception e)
             {
-                throw new Exception("Error while inserting an user:" + e.Message);
+                throw new Exception("Erro ao inserir utilizador: " + e.Message);
             }
         }
+
 
         private bool VerifyLogin(string username, string password)
         {
@@ -305,6 +335,33 @@ namespace Server
                 return false;
             }
 
+        }
+
+        private string DeCifrarTexto(string txtCifradoB64)
+        {
+            //Texto ara guardar o texto cifrado em Bytes
+            byte[] txtCifrado = Convert.FromBase64String(txtCifradoB64);
+
+            //Reservar espaço na memoria para colocar o texto e decifrá-lo
+            MemoryStream ms = new MemoryStream(txtCifrado);
+            //Inicializa o sistema de decifragem (Read)
+            CryptoStream cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Read);
+
+            //Variavel para guardar o texto decifrado em bytes
+            byte[] txtDecifrado = new byte[ms.Length];
+
+            //Variavel para ter o numero de bytes decifrado
+            int bytesLidos = 0;
+
+            //Decifrar os dados
+            bytesLidos = cs.Read(txtDecifrado, 0, txtDecifrado.Length);
+            cs.Close();
+
+            //Converter para texto
+            string txtDecifradoemTexto = Encoding.UTF8.GetString(txtDecifrado, 0, bytesLidos);
+
+            //Devolver o texto decifrado
+            return txtDecifradoemTexto;
         }
 
         private static byte[] GenerateSalt(int size)

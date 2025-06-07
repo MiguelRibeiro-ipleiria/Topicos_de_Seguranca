@@ -29,6 +29,8 @@ namespace WindowsFormsApp1
         NetworkStream networkStream;
         TcpClient client;
 
+        private string pk;
+        private string iv;
 
         public Form2()
         {
@@ -36,7 +38,7 @@ namespace WindowsFormsApp1
             label_ErroLogin.Visible = false;
 
             rsa = new RSACryptoServiceProvider();
-            AesCryptoServiceProvider aes;
+            aes = new AesCryptoServiceProvider();
 
             IPEndPoint endpoint = new IPEndPoint(IPAddress.Loopback, PORT);
             protocolSI = new ProtocolSI();
@@ -51,9 +53,6 @@ namespace WindowsFormsApp1
         {
             string pass = textBoxPass.Text;
             string username = textBoxUser.Text;
-
-
-
 
 
             byte[] packet = protocolSI.Make(ProtocolSICmdType.USER_OPTION_2, username + "+" + pass);
@@ -117,7 +116,16 @@ namespace WindowsFormsApp1
             string password = textBoxPass.Text;
             string username = textBoxUser.Text;
 
-            byte[] packet = protocolSI.Make(ProtocolSICmdType.USER_OPTION_1, username + "+" + password);
+            string keyB64 = pk;
+            string ivB64 = iv;
+            aes.Key = Convert.FromBase64String(keyB64);
+            aes.IV = Convert.FromBase64String(ivB64);
+
+            string registrocifrado = CifrarTexto(username + "+" + password);
+
+            label1.Text = registrocifrado;
+
+            byte[] packet = protocolSI.Make(ProtocolSICmdType.USER_OPTION_1, registrocifrado);
             networkStream.Write(packet, 0, packet.Length);
         }
 
@@ -131,7 +139,13 @@ namespace WindowsFormsApp1
             networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
             if (protocolSI.GetCmdType() == ProtocolSICmdType.DATA)
             {
-                ChaveSimetrica = protocolSI.GetStringFromData();
+                string PKeIV = protocolSI.GetStringFromData();
+                string[] ArrayRegistro = PKeIV.Split(new[] { "||" }, StringSplitOptions.None);
+
+                pk = ArrayRegistro[0];
+                iv = ArrayRegistro[1];
+
+
             }
         }
 
