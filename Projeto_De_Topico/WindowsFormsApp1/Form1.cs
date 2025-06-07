@@ -22,6 +22,7 @@ namespace WindowsFormsApp1
         private Form2 form2Ref;
 
         private const int PORT = 10000;
+        private RSACryptoServiceProvider rsa;
         NetworkStream networkStream;
         ProtocolSI protocolSI;
         TcpClient client;

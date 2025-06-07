@@ -37,3 +37,5 @@ C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_S
 C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\obj\Debug\Cliente.csproj.Up2Date
 C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\bin\Debug\Database1.mdf
+C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\bin\Debug\Database1_log.ldf
