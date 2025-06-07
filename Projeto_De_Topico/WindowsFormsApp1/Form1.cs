@@ -27,7 +27,7 @@ namespace WindowsFormsApp1
         ProtocolSI protocolSI;
         TcpClient client;
 
-        public Form1(Form2 form2)
+        public Form1(Form2 form2, string username)
         {
             InitializeComponent();
             lateraloff = true;
@@ -39,6 +39,8 @@ namespace WindowsFormsApp1
             client.Connect(endpoint);
             networkStream = client.GetStream();
             protocolSI = new ProtocolSI();
+
+            OutroUtilizador(username);
         }
 
         public void lateral_control()
@@ -51,8 +53,8 @@ namespace WindowsFormsApp1
                 guna2CustomGradientPanel2.Size = new Size(684, 57);
                 guna2CustomGradientPanel2.Location = new Point(66, 49);
 
-                label_nome_cliente.Location = new Point(522, 22);
-                pictureBox2.Location = new Point(616, 7);
+                label_nome_cliente.Location = new Point(126, 3);
+                pictureBox2.Location = new Point(627, 6);
 
                 guna2CustomGradientPanel1.Size = new Size(602, 37);
                 guna2CustomGradientPanel1.Location = new Point(74, 404);
@@ -91,8 +93,8 @@ namespace WindowsFormsApp1
                 guna2CustomGradientPanel2.Size = new Size(561, 57);
                 guna2CustomGradientPanel2.Location = new Point(189, 49);
 
-                label_nome_cliente.Location = new Point(410, 22);
-                pictureBox2.Location = new Point(504, 8);
+                label_nome_cliente.Location = new Point(3, 3); 
+                pictureBox2.Location = new Point(504, 6);
 
                 guna2CustomGradientPanel1.Size = new Size(481, 37);
                 guna2CustomGradientPanel1.Location = new Point(195, 404);
@@ -156,8 +158,6 @@ namespace WindowsFormsApp1
             textboxchat.Clear();
 
             textBoxInformacao.AppendText("Tu: " + msg + Environment.NewLine);
-
-
 
 
             //enviar mensagem
@@ -328,5 +328,22 @@ namespace WindowsFormsApp1
 
             popup.ShowDialog();
         }
-    }
+    
+
+        public void OutroUtilizador(string username)
+        {
+
+            byte[] packet = protocolSI.Make(ProtocolSICmdType.USER_OPTION_3, username);
+            networkStream.Write(packet, 0, packet.Length);
+
+            networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
+            if (protocolSI.GetCmdType() == ProtocolSICmdType.DATA)
+            {
+                string NomeUtilizador = protocolSI.GetStringFromData();
+                label_nome_cliente.Text = NomeUtilizador;
+            }
+        }
+
+
+    } 
 }

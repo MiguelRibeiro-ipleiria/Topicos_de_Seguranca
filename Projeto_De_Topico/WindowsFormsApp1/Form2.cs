@@ -65,6 +65,9 @@ namespace WindowsFormsApp1
                 {
                     MessageBox.Show("Logado Com Sucesso");
                     label_ErroLogin.Visible = false;
+                    this.Hide();
+                    Form1 novoForm = new Form1(this, username);
+                    novoForm.Show();
                 }
                 else if(protocolSI.GetStringFromData() == "erro")
                 {

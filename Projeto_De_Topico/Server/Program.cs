@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
+using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -179,7 +180,19 @@ namespace Server
                         }
 
 
-                        break;
+                    break;
+
+
+                    case ProtocolSICmdType.USER_OPTION_3:
+
+                        //Obter a chave e o IV
+                        string UserLogado = protocoloSI.GetStringFromData();
+
+                        string nome = NomeUtilizador(UserLogado);
+                        MandarMensagem(nome);
+
+
+                    break;
                 }
 
 
@@ -377,6 +390,39 @@ namespace Server
             Rfc2898DeriveBytes rfc2898 = new Rfc2898DeriveBytes(plainText, salt, NUMBER_OF_ITERATIONS);
             return rfc2898.GetBytes(32);
         }
+
+        public string NomeUtilizador(string username)
+        {
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = String.Format(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='C:\Users\migue\source\repos\Projeto_pasta_erros_clones\Pasta1\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\Database1.mdf';Integrated Security=True");
+                conn.Open();
+
+                // ✅ Vai buscar outro utilizador diferente do fornecido
+                string checkUserSql = "SELECT TOP 1 Username FROM Users WHERE Username != @username";
+                SqlCommand checkCmd = new SqlCommand(checkUserSql, conn);
+                checkCmd.Parameters.AddWithValue("@username", username);
+
+                object result = checkCmd.ExecuteScalar();
+                conn.Close();
+
+                if (result != null)
+                {
+                    return result.ToString();
+                }
+                else
+                {
+                    return "Cliente não encontrado";
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Erro ao ir buscar utilizador: " + e.Message);
+            }
+        }
+
 
 
     }
