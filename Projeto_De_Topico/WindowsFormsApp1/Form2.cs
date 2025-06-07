@@ -15,8 +15,6 @@ namespace WindowsFormsApp1
         private Form1 form1Ref;
         bool hidepass = true;
 
-        private const int SALTSIZE = 8;
-        private const int NUMBER_OF_ITERATIONS = 1000;
         private const int PORT = 10000;
 
         private RSACryptoServiceProvider rsa;
@@ -41,36 +39,26 @@ namespace WindowsFormsApp1
             PublicKey();
         }
 
-        private static byte[] GenerateSalt(int size)
-        {
-            //Generate a cryptographic random number.
-            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-            byte[] buff = new byte[size];
-            rng.GetBytes(buff);
-            return buff;
-        }
-        private static byte[] GenerateSaltedHash(string plainText, byte[] salt)
-        {
-            Rfc2898DeriveBytes rfc2898 = new Rfc2898DeriveBytes(plainText, salt, NUMBER_OF_ITERATIONS);
-            return rfc2898.GetBytes(32);
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             string pass = textBoxPass.Text;
             string username = textBoxUser.Text;
 
-            /*if (VerifyLogin(username, pass))
+            byte[] packet = protocolSI.Make(ProtocolSICmdType.USER_OPTION_2, username + "+" + pass);
+            networkStream.Write(packet, 0, packet.Length);
+
+            networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
+            if (protocolSI.GetCmdType() == ProtocolSICmdType.DATA)
             {
-                MessageBox.Show("USER VÁLIDO");
-                this.Hide();
-                Form1 form1 = new Form1(this);
-                form1.Show();
+                if(protocolSI.GetStringFromData() == "validado")
+                {
+                    MessageBox.Show("Logado Com Sucesso");
+                }
+                else if(protocolSI.GetStringFromData() == "erro")
+                {
+                    MessageBox.Show("Errado Com Sucesso");
+                }
             }
-            else
-            {
-                MessageBox.Show("AUTENTICAÇÃO ERRADA");
-            }*/
 
         }
 
@@ -113,17 +101,11 @@ namespace WindowsFormsApp1
 
         private void button_registro_Click(object sender, EventArgs e)
         {
-            string passoword = textBoxPass.Text;
+            string password = textBoxPass.Text;
             string username = textBoxUser.Text;
 
-            byte[] packet = protocolSI.Make(ProtocolSICmdType.USER_OPTION_1, username+passoword);
+            byte[] packet = protocolSI.Make(ProtocolSICmdType.USER_OPTION_1, username + "+" + password);
             networkStream.Write(packet, 0, packet.Length);
-
-
-            byte[] salt = GenerateSalt(SALTSIZE);
-            byte[] hash = GenerateSaltedHash(passoword, salt);
-
-            //Register(username, hash, salt);
         }
 
         public void PublicKey()

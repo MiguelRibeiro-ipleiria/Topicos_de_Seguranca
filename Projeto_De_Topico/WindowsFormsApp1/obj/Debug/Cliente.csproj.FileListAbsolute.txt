@@ -39,3 +39,5 @@ C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_S
 C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
 C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\bin\Debug\Database1.mdf
 C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\bin\Debug\Database1_log.ldf
+C:\Users\migue\source\repos\Projeto_pasta_erros_clones\Pasta1\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\bin\Debug\Database1.mdf
+C:\Users\migue\source\repos\Projeto_pasta_erros_clones\Pasta1\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\bin\Debug\Database1_log.ldf

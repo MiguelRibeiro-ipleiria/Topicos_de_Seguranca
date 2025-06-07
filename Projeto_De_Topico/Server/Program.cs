@@ -16,6 +16,7 @@ namespace Server
     class Program
     {
         private const int PORT = 10000;
+
         private string publickey;
         private static int clientes_counter = 0;
         public static List<ClientHandler> clientes = new List<ClientHandler>();
@@ -57,6 +58,8 @@ namespace Server
     {
         private TcpClient client;
         private int clientID;
+        private const int SALTSIZE = 8;
+        private const int NUMBER_OF_ITERATIONS = 1000;
 
         public ClientHandler(TcpClient client, int clientID)
         {
@@ -124,16 +127,42 @@ namespace Server
 
                     case ProtocolSICmdType.USER_OPTION_1:
 
-                        /*//registro
-                        string publickey = protocoloSI.GetStringFromData();
-                        Console.WriteLine("PUBLICKEY :" + publickey);
+                        //registro
+                        string RegistroUserANDPass = protocoloSI.GetStringFromData();
+                        string[] ArrayRegistro = RegistroUserANDPass.Split('+');
 
-                        string pk = GerarChavePrivada(publickey);
+                        string username = ArrayRegistro[0];
+                        string password = ArrayRegistro[1];
+                        byte[] salt = GenerateSalt(SALTSIZE);
+                        byte[] hash = GenerateSaltedHash(password, salt);
 
-                        MandarMensagem(pk);*/
+                        Register(username, hash, salt);
+
+                        break;
 
 
-                    break;
+                    case ProtocolSICmdType.USER_OPTION_2:
+
+                        //registro
+                        string LoginUserANDPass = protocoloSI.GetStringFromData();
+                        string[] ArrayLogin = LoginUserANDPass.Split('+');
+
+                        string user = ArrayLogin[0];
+                        string pass = ArrayLogin[1];
+                                    
+                        if (VerifyLogin(user, pass))
+                        {
+                            Console.WriteLine("Logado");
+                            MandarMensagem("validado");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Erro");
+                            MandarMensagem("erro");
+                        }
+
+
+                        break;
                 }
 
 
@@ -179,7 +208,7 @@ namespace Server
             {
                 // Configurar ligação à Base de Dados
                 conn = new SqlConnection();
-                conn.ConnectionString = String.Format(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\Database1.mdf';Integrated Security=True");
+                conn.ConnectionString = String.Format(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='C:\Users\migue\source\repos\Projeto_pasta_erros_clones\Pasta1\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\Database1.mdf';Integrated Security=True");
 
                 // Abrir ligação à Base de Dados
                 conn.Open();
@@ -225,7 +254,7 @@ namespace Server
             {
                 // Configurar ligação à Base de Dados
                 conn = new SqlConnection();
-                conn.ConnectionString = String.Format(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='C:\Users\migue\source\repos\PROJETO_OFICIAL_DE_TOPICOS_DE_SEGURANCA\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\Database1.mdf';Integrated Security=True");
+                conn.ConnectionString = String.Format(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='C:\Users\migue\source\repos\Projeto_pasta_erros_clones\Pasta1\Topicos_de_Seguranca\Projeto_De_Topico\WindowsFormsApp1\Database1.mdf';Integrated Security=True");
 
                 // Abrir ligação à Base de Dados
                 conn.Open();
@@ -264,9 +293,9 @@ namespace Server
                 conn.Close();
 
                 //TODO: verificar se a password na base de dados 
-                //byte[] hash = GenerateSaltedHash(password, saltStored);
+                byte[] hash = GenerateSaltedHash(password, saltStored);
 
-                //return saltedPasswordHashStored.SequenceEqual(hash);
+                return saltedPasswordHashStored.SequenceEqual(hash);
 
                 throw new NotImplementedException();
             }
@@ -275,6 +304,21 @@ namespace Server
                 //MessageBox.Show("An error occurred: " + e.Message);
                 return false;
             }
+
+        }
+
+        private static byte[] GenerateSalt(int size)
+        {
+            //Generate a cryptographic random number.
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            byte[] buff = new byte[size];
+            rng.GetBytes(buff);
+            return buff;
+        }
+        private static byte[] GenerateSaltedHash(string plainText, byte[] salt)
+        {
+            Rfc2898DeriveBytes rfc2898 = new Rfc2898DeriveBytes(plainText, salt, NUMBER_OF_ITERATIONS);
+            return rfc2898.GetBytes(32);
         }
 
 
