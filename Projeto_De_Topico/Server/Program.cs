@@ -33,10 +33,6 @@ namespace Server
             int clientes_counter = 0;
 
 
-   
-           
-
-
             while (true)
             {
                 TcpClient client = listener.AcceptTcpClient();
@@ -134,12 +130,8 @@ namespace Server
                         //registro
                         string RegistroUserANDPass = protocoloSI.GetStringFromData();
 
-                        //Obter a chave e o IV
-                        string keyB64 = pk;
-                        string ivB64 = iv;
-
-                        aes.Key = Convert.FromBase64String(keyB64);
-                        aes.IV = Convert.FromBase64String(ivB64);
+                        aes.Key = Convert.FromBase64String(pk);
+                        aes.IV = Convert.FromBase64String(iv);
 
                         Console.WriteLine(RegistroUserANDPass);
 
@@ -162,21 +154,27 @@ namespace Server
                     case ProtocolSICmdType.USER_OPTION_2:
 
                         //registro
+                        string LoginResultado;
                         string LoginUserANDPass = protocoloSI.GetStringFromData();
-                        string[] ArrayLogin = LoginUserANDPass.Split('+');
+
+                        aes.Key = Convert.FromBase64String(pk);
+                        aes.IV = Convert.FromBase64String(iv);
+
+                        string LoginDecifrado = DeCifrarTexto(LoginUserANDPass);
+                        string[] ArrayLogin = LoginDecifrado.Split('+');
 
                         string user = ArrayLogin[0];
                         string pass = ArrayLogin[1];
                                     
                         if (VerifyLogin(user, pass))
                         {
-                            Console.WriteLine("Logado");
-                            MandarMensagem("validado");
+                            LoginResultado = CifrarTexto("validado");
+                            MandarMensagem(LoginResultado);
                         }
                         else
                         {
-                            Console.WriteLine("Erro");
-                            MandarMensagem("erro");
+                            LoginResultado = CifrarTexto("erro");
+                            MandarMensagem(LoginResultado);
                         }
 
 
@@ -375,6 +373,33 @@ namespace Server
 
             //Devolver o texto decifrado
             return txtDecifradoemTexto;
+        }
+
+        private string CifrarTexto(string TextoACifrar)
+        {
+            //Texto ara guardar o texto decifrado em Bytes
+            byte[] txtDecifrado = Encoding.UTF8.GetBytes(TextoACifrar);
+
+            //Texto ara guardar o cifrado em bytes
+            byte[] txtCifrado;
+
+            //Reservar espaço na memoria para colocar o texto e cifrá-lo
+            MemoryStream ms = new MemoryStream();
+            //Inicializa o sistema de cifragem (Write)
+            CryptoStream cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write);
+            //Cifrar os dados
+            cs.Write(txtDecifrado, 0, txtDecifrado.Length);
+            cs.Close();
+
+            //Guardar os dados cifrado que estão na memória
+            txtCifrado = ms.ToArray();
+
+            //Converter os dados para base64 (texto)
+            string txtCifradoB64 = Convert.ToBase64String(txtCifrado);
+
+            //Devolver os bytes em base64
+            return txtCifradoB64;
+
         }
 
         private static byte[] GenerateSalt(int size)

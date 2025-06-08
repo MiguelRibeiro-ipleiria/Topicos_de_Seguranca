@@ -119,7 +119,6 @@
             this.label_nome_cliente.Name = "label_nome_cliente";
             this.label_nome_cliente.Size = new System.Drawing.Size(507, 54);
             this.label_nome_cliente.TabIndex = 0;
-            this.label_nome_cliente.Text = "Guedes";
             this.label_nome_cliente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // panel3

@@ -54,14 +54,20 @@ namespace WindowsFormsApp1
             string pass = textBoxPass.Text;
             string username = textBoxUser.Text;
 
+            string keyB64 = pk;
+            string ivB64 = iv;
+            aes.Key = Convert.FromBase64String(keyB64);
+            aes.IV = Convert.FromBase64String(ivB64);
+            string registrocifrado = CifrarTexto(username + "+" + pass);
 
-            byte[] packet = protocolSI.Make(ProtocolSICmdType.USER_OPTION_2, username + "+" + pass);
+            byte[] packet = protocolSI.Make(ProtocolSICmdType.USER_OPTION_2, registrocifrado);
             networkStream.Write(packet, 0, packet.Length);
 
             networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
             if (protocolSI.GetCmdType() == ProtocolSICmdType.DATA)
             {
-                if(protocolSI.GetStringFromData() == "validado")
+                string ResultadoLogin = DeCifrarTexto(protocolSI.GetStringFromData());
+                if (ResultadoLogin == "validado")
                 {
                     MessageBox.Show("Logado Com Sucesso");
                     label_ErroLogin.Visible = false;
@@ -69,12 +75,11 @@ namespace WindowsFormsApp1
                     Form1 novoForm = new Form1(this, username);
                     novoForm.Show();
                 }
-                else if(protocolSI.GetStringFromData() == "erro")
+                else if(ResultadoLogin == "erro")
                 {
                     label_ErroLogin.Visible = true;
                 }
             }
-
         }
 
 
@@ -126,8 +131,6 @@ namespace WindowsFormsApp1
 
             string registrocifrado = CifrarTexto(username + "+" + password);
 
-            label1.Text = registrocifrado;
-
             byte[] packet = protocolSI.Make(ProtocolSICmdType.USER_OPTION_1, registrocifrado);
             networkStream.Write(packet, 0, packet.Length);
         }
@@ -147,8 +150,6 @@ namespace WindowsFormsApp1
 
                 pk = ArrayRegistro[0];
                 iv = ArrayRegistro[1];
-
-
             }
         }
 
@@ -177,6 +178,33 @@ namespace WindowsFormsApp1
             //Devolver os bytes em base64
             return txtCifradoB64;
 
+        }
+
+        private string DeCifrarTexto(string txtCifradoB64)
+        {
+            //Texto ara guardar o texto cifrado em Bytes
+            byte[] txtCifrado = Convert.FromBase64String(txtCifradoB64);
+
+            //Reservar espaço na memoria para colocar o texto e decifrá-lo
+            MemoryStream ms = new MemoryStream(txtCifrado);
+            //Inicializa o sistema de decifragem (Read)
+            CryptoStream cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Read);
+
+            //Variavel para guardar o texto decifrado em bytes
+            byte[] txtDecifrado = new byte[ms.Length];
+
+            //Variavel para ter o numero de bytes decifrado
+            int bytesLidos = 0;
+
+            //Decifrar os dados
+            bytesLidos = cs.Read(txtDecifrado, 0, txtDecifrado.Length);
+            cs.Close();
+
+            //Converter para texto
+            string txtDecifradoemTexto = Encoding.UTF8.GetString(txtDecifrado, 0, bytesLidos);
+
+            //Devolver o texto decifrado
+            return txtDecifradoemTexto;
         }
 
     }
