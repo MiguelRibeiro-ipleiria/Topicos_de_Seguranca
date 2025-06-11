@@ -36,8 +36,8 @@ namespace Server
             {
                 TcpClient client = listener.AcceptTcpClient();
                 clientes_counter++;
-                Console.WriteLine("Client {0} connected", clientes_counter);
                 ClientHandler clientHandler = new ClientHandler(client, clientes_counter);
+                clientHandler.GuardarDados("Cliente Conectado");
 
                 lock (lockObj)
                 {
@@ -109,6 +109,7 @@ namespace Server
                     // CASO O CLIENTE ENVIO EOT (FIM DE TRANSMISSAO)
                     case ProtocolSICmdType.EOT:
                         Console.WriteLine("Ending Thread from Client {0}", clientID);
+                        GuardarDados("Um cliente terminou a thread");
                         ack = protocoloSI.Make(ProtocolSICmdType.ACK);
                         networkStream.Write(ack, 0, ack.Length);
                         break;
@@ -259,6 +260,7 @@ namespace Server
                 if (userExists > 0)
                 {
                     Console.WriteLine("Utilizador já existe.");
+                    GuardarDados("REGISTO BD - Utilizador já existe");
                     MandarMensagem("erro: user já existe");
                     return;
                 }
@@ -278,10 +280,12 @@ namespace Server
                     throw new Exception("Error while inserting user");
                 }
 
+                GuardarDados("REGISTO BD - User Inserido");
                 MandarMensagem("user inserido com sucesso");
             }
             catch (Exception e)
             {
+                GuardarDados("REGISTO BD - Erro ao inserir utilizador: " +  e.Message);
                 throw new Exception("Erro ao inserir utilizador: " + e.Message);
             }
         }
@@ -318,6 +322,7 @@ namespace Server
 
                 if (!reader.HasRows)
                 {
+                    GuardarDados("LOGIN BD - Erro ao tentar acessar um user: ");
                     throw new Exception("Error while trying to access an user");
                 }
 
@@ -434,17 +439,32 @@ namespace Server
 
                 if (result != null)
                 {
+                    GuardarDados("ENCONTRAR USER BD - : User Encontrado");
                     return result.ToString();
                 }
                 else
                 {
+                    GuardarDados("ENCONTRAR USER BD - : Cliente não encontrado");
                     return "Cliente não encontrado";
                 }
             }
             catch (Exception e)
             {
+                GuardarDados("ENCONTRAR USER BD - : Erro ao ir buscar utilizador" + e.Message);
                 throw new Exception("Erro ao ir buscar utilizador: " + e.Message);
             }
+        }
+
+        public void GuardarDados(string dados)
+        {
+
+            String LogFilepath = "log.txt";
+
+            StreamWriter originalFileStream = File.AppendText(LogFilepath);
+
+            originalFileStream.WriteLine(dados);
+
+            originalFileStream.Close();
         }
 
 

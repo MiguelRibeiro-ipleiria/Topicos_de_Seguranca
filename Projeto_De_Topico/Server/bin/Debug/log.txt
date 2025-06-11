@@ -1,0 +1,5 @@
+Cliente Conectado
+Cliente Conectado
+ENCONTRAR USER BD - : User Encontrado
+Um cliente terminou a thread
+Cliente Conectado
