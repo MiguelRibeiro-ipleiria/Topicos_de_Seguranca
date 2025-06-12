@@ -30,7 +30,7 @@ namespace Server
 
             listener.Start();
             Console.WriteLine("The server is READY!!");
-            int clientes_counter = 0;
+            clientes_counter = 0;
 
             while (true)
             {
