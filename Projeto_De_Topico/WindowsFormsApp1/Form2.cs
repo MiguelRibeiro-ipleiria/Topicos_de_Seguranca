@@ -22,9 +22,6 @@ namespace WindowsFormsApp1
         private RSACryptoServiceProvider rsa;
         private AesCryptoServiceProvider aes;
 
-
-        private string ChaveSimetrica;
-
         ProtocolSI protocolSI;
         NetworkStream networkStream;
         TcpClient client;
@@ -72,7 +69,7 @@ namespace WindowsFormsApp1
                     MessageBox.Show("Logado Com Sucesso");
                     label_ErroLogin.Visible = false;
                     this.Hide();
-                    Form1 novoForm = new Form1(this, username);
+                    Form1 novoForm = new Form1(this, username, client, keyB64, ivB64);
                     novoForm.Show();
                 }
                 else if(ResultadoLogin == "erro")

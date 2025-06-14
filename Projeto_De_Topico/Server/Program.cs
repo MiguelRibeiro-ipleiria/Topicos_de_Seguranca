@@ -37,6 +37,7 @@ namespace Server
                 TcpClient client = listener.AcceptTcpClient();
                 clientes_counter++;
                 ClientHandler clientHandler = new ClientHandler(client, clientes_counter);
+                Console.WriteLine("Cliente " + clientes_counter + "connectado");
                 clientHandler.GuardarDados("Cliente Conectado");
 
                 lock (lockObj)
@@ -87,8 +88,11 @@ namespace Server
                 {
                     case ProtocolSICmdType.DATA:
                         //ESCREVER MENSAGEM DO CLIENTE
-                        string mensagemRecebida = protocoloSI.GetStringFromData();
-                        Console.WriteLine("Client " + clientID + ": " + mensagemRecebida);
+                        aes.Key = Convert.FromBase64String(pk);
+                        aes.IV = Convert.FromBase64String(iv);
+
+                        string mensagemRecebidadecifrada = DeCifrarTexto(protocoloSI.GetStringFromData());
+                        Console.WriteLine("Client " + clientID + ": " + mensagemRecebidadecifrada);
 
                         ack = protocoloSI.Make(ProtocolSICmdType.ACK);
                         networkStream.Write(ack, 0, ack.Length);
@@ -100,7 +104,8 @@ namespace Server
                             {
                                 if (clientes != this)
                                 {
-                                    clientes.MandarMensagem("Cliente " + clientID + ": " + mensagemRecebida);
+                                    string textocifrado = CifrarTexto("Cliente " + clientID + ": " + mensagemRecebidadecifrada);
+                                    clientes.MandarMensagem(textocifrado);
                                 }
                             }
                         }
@@ -153,7 +158,7 @@ namespace Server
 
                     case ProtocolSICmdType.USER_OPTION_2:
 
-                        //registro
+                        //login
                         string LoginResultado;
                         string LoginUserANDPass = protocoloSI.GetStringFromData();
 
@@ -166,6 +171,7 @@ namespace Server
                         string user = ArrayLogin[0];
                         string pass = ArrayLogin[1];
                                     
+
                         if (VerifyLogin(user, pass))
                         {
                             LoginResultado = CifrarTexto("validado");

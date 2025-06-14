@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -13,6 +14,7 @@ using System.Windows.Forms;
 using EI.SI;
 
 using Guna.UI2.WinForms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace WindowsFormsApp1
 {
@@ -21,22 +23,29 @@ namespace WindowsFormsApp1
         bool lateraloff = true;
         private Form2 form2Ref;
 
+        private AesCryptoServiceProvider aes;
+
         private const int PORT = 10000;
         private RSACryptoServiceProvider rsa;
         NetworkStream networkStream;
         ProtocolSI protocolSI;
         TcpClient client;
 
-        public Form1(Form2 form2, string username)
+        private string pk;
+        private string iv;
+
+        public Form1(Form2 form2, string username, TcpClient cliente, string privatekey, string vetorinicializacao)
         {
             InitializeComponent();
             lateraloff = true;
             lateral_control();
             form2Ref = form2;
 
-            IPEndPoint endpoint = new IPEndPoint(IPAddress.Loopback, PORT);
-            client = new TcpClient();
-            client.Connect(endpoint);
+            aes = new AesCryptoServiceProvider();
+            client = cliente;
+            pk = privatekey;
+            iv = vetorinicializacao;
+
             networkStream = client.GetStream();
             protocolSI = new ProtocolSI();
 
@@ -159,9 +168,12 @@ namespace WindowsFormsApp1
 
             textBoxInformacao.AppendText("Tu: " + msg + Environment.NewLine);
 
+            aes.Key = Convert.FromBase64String(pk);
+            aes.IV = Convert.FromBase64String(iv);
+            string mensagemcifrada = CifrarTexto(msg);
 
             //enviar mensagem
-            byte[] packet = protocolSI.Make(ProtocolSICmdType.DATA, msg);
+            byte[] packet = protocolSI.Make(ProtocolSICmdType.DATA, mensagemcifrada);
             networkStream.Write(packet, 0, packet.Length);
 
             ProtocolSICmdType cmd;
@@ -174,9 +186,64 @@ namespace WindowsFormsApp1
             networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
             if (protocolSI.GetCmdType() == ProtocolSICmdType.DATA)
             {
-                string response = protocolSI.GetStringFromData();
-                textBoxInformacao.AppendText(response + Environment.NewLine);
+                string mensagemrecebidadecifrada = DeCifrarTexto(protocolSI.GetStringFromData());
+                textBoxInformacao.AppendText(mensagemrecebidadecifrada + Environment.NewLine);
             }
+        }
+
+
+        private string CifrarTexto(string TextoACifrar)
+        {
+            //Texto ara guardar o texto decifrado em Bytes
+            byte[] txtDecifrado = Encoding.UTF8.GetBytes(TextoACifrar);
+
+            //Texto ara guardar o cifrado em bytes
+            byte[] txtCifrado;
+
+            //Reservar espaço na memoria para colocar o texto e cifrá-lo
+            MemoryStream ms = new MemoryStream();
+            //Inicializa o sistema de cifragem (Write)
+            CryptoStream cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write);
+            //Cifrar os dados
+            cs.Write(txtDecifrado, 0, txtDecifrado.Length);
+            cs.Close();
+
+            //Guardar os dados cifrado que estão na memória
+            txtCifrado = ms.ToArray();
+
+            //Converter os dados para base64 (texto)
+            string txtCifradoB64 = Convert.ToBase64String(txtCifrado);
+
+            //Devolver os bytes em base64
+            return txtCifradoB64;
+
+        }
+
+        private string DeCifrarTexto(string txtCifradoB64)
+        {
+            //Texto ara guardar o texto cifrado em Bytes
+            byte[] txtCifrado = Convert.FromBase64String(txtCifradoB64);
+
+            //Reservar espaço na memoria para colocar o texto e decifrá-lo
+            MemoryStream ms = new MemoryStream(txtCifrado);
+            //Inicializa o sistema de decifragem (Read)
+            CryptoStream cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Read);
+
+            //Variavel para guardar o texto decifrado em bytes
+            byte[] txtDecifrado = new byte[ms.Length];
+
+            //Variavel para ter o numero de bytes decifrado
+            int bytesLidos = 0;
+
+            //Decifrar os dados
+            bytesLidos = cs.Read(txtDecifrado, 0, txtDecifrado.Length);
+            cs.Close();
+
+            //Converter para texto
+            string txtDecifradoemTexto = Encoding.UTF8.GetString(txtDecifrado, 0, bytesLidos);
+
+            //Devolver o texto decifrado
+            return txtDecifradoemTexto;
         }
 
         private void CloseClient()
@@ -267,6 +334,7 @@ namespace WindowsFormsApp1
 
         }
 
+
         private void guna2Button3_Click(object sender, EventArgs e)
         {
             var popup = new Form()
@@ -329,6 +397,10 @@ namespace WindowsFormsApp1
             popup.ShowDialog();
         }
     
+
+
+
+
 
         public void OutroUtilizador(string username)
         {
