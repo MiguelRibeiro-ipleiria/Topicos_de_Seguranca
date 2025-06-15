@@ -91,7 +91,10 @@ namespace Server
                         aes.Key = Convert.FromBase64String(pk);
                         aes.IV = Convert.FromBase64String(iv);
 
-                        string mensagemRecebidadecifrada = DeCifrarTexto(protocoloSI.GetStringFromData());
+                        string mensagemRecebida = (protocoloSI.GetStringFromData());
+                        Console.WriteLine("Client " + clientID + ": " + mensagemRecebida);
+
+                        string mensagemRecebidadecifrada = DeCifrarTexto(mensagemRecebida);
                         Console.WriteLine("Client " + clientID + ": " + mensagemRecebidadecifrada);
 
                         ack = protocoloSI.Make(ProtocolSICmdType.ACK);
@@ -120,15 +123,26 @@ namespace Server
                         break;
 
                     case ProtocolSICmdType.PUBLIC_KEY:
-
                         string publickey = protocoloSI.GetStringFromData();
-                        Console.WriteLine("PUBLICKEY :"+ publickey);
+                        Console.WriteLine("PUBLICKEY :" + publickey);
 
-                        pk = GerarChavePrivada(publickey);
-                        iv = GerarIV(publickey);
+                        // Se ainda não existe uma chave AES gerada no servidor, gerar agora (só uma vez)
+                        lock (Program.lockObj)
+                        {
+                            if (Program.clientes[0].pk == null)
+                            {
+                                Program.clientes[0].pk = GerarChavePrivada(publickey);
+                                Program.clientes[0].iv = GerarIV(publickey);
+                            }
+                        }
+
+                        // Esta instância do cliente recebe a chave AES cifrada com a SUA chave pública
+                        pk = Program.clientes[0].pk;
+                        iv = Program.clientes[0].iv;
+
                         MandarMensagem(pk + "||" + iv);
-
                         break;
+
 
                     case ProtocolSICmdType.USER_OPTION_1:
 
