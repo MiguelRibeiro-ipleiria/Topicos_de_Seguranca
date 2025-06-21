@@ -22,7 +22,7 @@ namespace WindowsFormsApp1
     {
         bool lateraloff = true;
         private Form2 form2Ref;
-
+        private string usernamecliente;
         private AesCryptoServiceProvider aes;
 
         private const int PORT = 10000;
@@ -49,7 +49,7 @@ namespace WindowsFormsApp1
             networkStream = client.GetStream();
             protocolSI = new ProtocolSI();
 
-            OutroUtilizador(username);
+            usernamecliente = OutroUtilizador(username);
         }
 
         public void lateral_control()
@@ -78,19 +78,12 @@ namespace WindowsFormsApp1
                 guna2Button2.ImageAlign = (HorizontalAlignment)ContentAlignment.MiddleCenter;
                 guna2Button3.ImageSize = new Size(40, 40);
 
-                ButaoCifrarMenu.Text = "";
-                ButaoCifrarMenu.Image = WindowsFormsApp1.Properties.Resources.chatting;
-                ButaoCifrarMenu.ImageAlign = (HorizontalAlignment)ContentAlignment.MiddleCenter;
-                ButaoCifrarMenu.ImageSize = new Size(40, 40);
-
                 guna2Button2.Size = new Size(41, 40);
                 guna2Button2.Location = new Point(14, 349);
 
                 guna2Button3.Size = new Size(41, 40);
                 guna2Button3.Location = new Point(14, 29);
 
-                ButaoCifrarMenu.Size = new Size(41, 40);
-                ButaoCifrarMenu.Location = new Point(14, 90);
 
                 lateraloff = false;
             }
@@ -102,7 +95,7 @@ namespace WindowsFormsApp1
                 guna2CustomGradientPanel2.Size = new Size(561, 57);
                 guna2CustomGradientPanel2.Location = new Point(189, 49);
 
-                label_nome_cliente.Location = new Point(3, 3); 
+                label_nome_cliente.Location = new Point(3, 3);
                 pictureBox2.Location = new Point(504, 6);
 
                 guna2CustomGradientPanel1.Size = new Size(481, 37);
@@ -120,20 +113,11 @@ namespace WindowsFormsApp1
                 guna2Button3.TextAlign = (HorizontalAlignment)ContentAlignment.MiddleRight;
                 guna2Button3.ImageSize = new Size(39, 39);
 
-                ButaoCifrarMenu.Text = "     Cifrar";
-                ButaoCifrarMenu.Image = WindowsFormsApp1.Properties.Resources.chatting;
-                ButaoCifrarMenu.ImageAlign = (HorizontalAlignment)ContentAlignment.MiddleLeft;
-                ButaoCifrarMenu.TextAlign = (HorizontalAlignment)ContentAlignment.MiddleRight;
-                ButaoCifrarMenu.ImageSize = new Size(39, 39);
-
                 guna2Button2.Size = new Size(146, 40);
                 guna2Button2.Location = new Point(14, 349);
 
                 guna2Button3.Size = new Size(155, 40);
                 guna2Button3.Location = new Point(14, 29);
-
-                ButaoCifrarMenu.Size = new Size(155, 40);
-                ButaoCifrarMenu.Location = new Point(14, 90);
 
                 lateraloff = true;
             }
@@ -147,7 +131,6 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            CloseClient();
             Form2 novoForm = new Form2();
             novoForm.Show();
             Close();
@@ -155,7 +138,6 @@ namespace WindowsFormsApp1
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
-            CloseClient();
             Form2 novoForm = new Form2();
             novoForm.Show();
             Close();
@@ -187,7 +169,7 @@ namespace WindowsFormsApp1
             if (protocolSI.GetCmdType() == ProtocolSICmdType.DATA)
             {
                 string mensagemrecebidadecifrada = DeCifrarTexto(protocolSI.GetStringFromData());
-                textBoxInformacao.AppendText(mensagemrecebidadecifrada + Environment.NewLine);
+                textBoxInformacao.AppendText(usernamecliente + ": " + mensagemrecebidadecifrada + Environment.NewLine);
             }
         }
 
@@ -244,17 +226,6 @@ namespace WindowsFormsApp1
 
             //Devolver o texto decifrado
             return txtDecifradoemTexto;
-        }
-
-        private void CloseClient()
-        {
-            //Vou enviar o EOT para o servidor
-            byte[] EOT = protocolSI.Make(ProtocolSICmdType.EOT);
-            networkStream.Write(EOT, 0, EOT.Length);
-            //LER O ACK
-            networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
-            networkStream.Close();
-            client.Close();
         }
 
         private void ButaoCifrarMenu_Click(object sender, EventArgs e)
@@ -396,13 +367,8 @@ namespace WindowsFormsApp1
 
             popup.ShowDialog();
         }
-    
 
-
-
-
-
-        public void OutroUtilizador(string username)
+        public string OutroUtilizador(string username)
         {
 
             byte[] packet = protocolSI.Make(ProtocolSICmdType.USER_OPTION_3, username);
@@ -413,9 +379,11 @@ namespace WindowsFormsApp1
             {
                 string NomeUtilizador = protocolSI.GetStringFromData();
                 label_nome_cliente.Text = NomeUtilizador;
+                return NomeUtilizador;
             }
+            return null;
         }
 
 
-    } 
+    }
 }

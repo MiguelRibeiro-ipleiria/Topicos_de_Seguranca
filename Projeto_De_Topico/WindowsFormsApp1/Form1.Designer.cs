@@ -39,7 +39,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.textBoxInformacao = new System.Windows.Forms.TextBox();
             this.panel_lateral = new System.Windows.Forms.Panel();
-            this.ButaoCifrarMenu = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -137,38 +136,18 @@
             this.textBoxInformacao.Location = new System.Drawing.Point(3, 3);
             this.textBoxInformacao.Multiline = true;
             this.textBoxInformacao.Name = "textBoxInformacao";
-            this.textBoxInformacao.Size = new System.Drawing.Size(561, 290);
+            this.textBoxInformacao.Size = new System.Drawing.Size(561, 288);
             this.textBoxInformacao.TabIndex = 0;
             // 
             // panel_lateral
             // 
             this.panel_lateral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(40)))), ((int)(((byte)(49)))));
-            this.panel_lateral.Controls.Add(this.ButaoCifrarMenu);
             this.panel_lateral.Controls.Add(this.guna2Button3);
             this.panel_lateral.Controls.Add(this.guna2Button2);
             this.panel_lateral.Location = new System.Drawing.Point(-2, 52);
             this.panel_lateral.Name = "panel_lateral";
             this.panel_lateral.Size = new System.Drawing.Size(191, 403);
             this.panel_lateral.TabIndex = 18;
-            // 
-            // ButaoCifrarMenu
-            // 
-            this.ButaoCifrarMenu.BackColor = System.Drawing.Color.Transparent;
-            this.ButaoCifrarMenu.BorderRadius = 10;
-            this.ButaoCifrarMenu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ButaoCifrarMenu.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.ButaoCifrarMenu.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.ButaoCifrarMenu.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.ButaoCifrarMenu.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.ButaoCifrarMenu.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(95)))), ((int)(((byte)(115)))));
-            this.ButaoCifrarMenu.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButaoCifrarMenu.ForeColor = System.Drawing.Color.White;
-            this.ButaoCifrarMenu.Location = new System.Drawing.Point(14, 90);
-            this.ButaoCifrarMenu.Name = "ButaoCifrarMenu";
-            this.ButaoCifrarMenu.Size = new System.Drawing.Size(155, 40);
-            this.ButaoCifrarMenu.TabIndex = 31;
-            this.ButaoCifrarMenu.Text = "Cifrar";
-            this.ButaoCifrarMenu.Click += new System.EventHandler(this.ButaoCifrarMenu_Click);
             // 
             // guna2Button3
             // 
@@ -323,7 +302,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
-        private Guna.UI2.WinForms.Guna2Button ButaoCifrarMenu;
         private System.Windows.Forms.TextBox textBoxInformacao;
         private System.Windows.Forms.Label label_nome_cliente;
     }

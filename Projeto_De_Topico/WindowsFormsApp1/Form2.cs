@@ -16,6 +16,7 @@ namespace WindowsFormsApp1
     {
         private Form1 form1Ref;
         bool hidepass = true;
+        private bool clienteFechado = false;
 
         private const int PORT = 10000;
 
@@ -29,6 +30,7 @@ namespace WindowsFormsApp1
 
         private string pk;
         private string iv;
+        private string publickey;
 
         public Form2()
         {
@@ -44,7 +46,7 @@ namespace WindowsFormsApp1
             client.Connect(endpoint);
             networkStream = client.GetStream();
 
-            PublicKey();
+            publickey = PublicKey();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -78,16 +80,6 @@ namespace WindowsFormsApp1
                     label_ErroLogin.Visible = true;
                 }
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (form1Ref != null)
-            {
-                form1Ref.Close(); 
-            }
-            this.Close(); 
-            Application.Exit(); 
         }
 
 
@@ -132,7 +124,7 @@ namespace WindowsFormsApp1
             networkStream.Write(packet, 0, packet.Length);
         }
 
-        public void PublicKey()
+        public string PublicKey()
         {
             string publickey = rsa.ToXmlString(false);
 
@@ -148,6 +140,7 @@ namespace WindowsFormsApp1
                 pk = ArrayRegistro[0];
                 iv = ArrayRegistro[1];
             }
+            return publickey;
         }
 
         public string DeCifrarTexto(string txtCifradoB64)
@@ -204,5 +197,38 @@ namespace WindowsFormsApp1
 
         }
 
+        private void CloseCliente()
+        {
+            if (clienteFechado)
+            {
+                return;
+            } 
+            clienteFechado = true;
+
+            try
+            {
+                byte[] EOT = protocolSI.Make(ProtocolSICmdType.EOT);
+                networkStream.Write(EOT, 0, EOT.Length);
+                networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
+                networkStream.Close();
+                client.Close();
+
+            }
+            catch (Exception ex)
+            {
+                // Logar outros erros se necessário
+                MessageBox.Show("Erro ao fechar cliente: " + ex.Message);
+            }
+        }
+
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            CloseCliente();
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            CloseCliente();
+            this.Close();
+        }
     }
 }

@@ -30,6 +30,7 @@ namespace Server
 
             listener.Start();
             Console.WriteLine("The server is READY!!");
+            GuardarDados("O servidor está pronto");
             clientes_counter = 0;
 
             while (true)
@@ -37,8 +38,8 @@ namespace Server
                 TcpClient client = listener.AcceptTcpClient();
                 clientes_counter++;
                 ClientHandler clientHandler = new ClientHandler(client, clientes_counter);
-                Console.WriteLine("Cliente " + clientes_counter + "connectado");
-                clientHandler.GuardarDados("Cliente Conectado");
+                Console.WriteLine("Cliente " + clientes_counter + " Connectado");
+                GuardarDados("Cliente " + clientes_counter + " Conectado");
 
                 lock (lockObj)
                 {
@@ -48,6 +49,18 @@ namespace Server
 
                 clientHandler.Handle();
             }
+        }
+
+        public static void GuardarDados(string dados) 
+        {
+
+            String LogFilepath = "log.txt";
+
+            StreamWriter originalFileStream = File.AppendText(LogFilepath);
+
+            originalFileStream.WriteLine(dados);
+
+            originalFileStream.Close();
         }
     }
 
@@ -92,10 +105,7 @@ namespace Server
                         aes.IV = Convert.FromBase64String(iv);
 
                         string mensagemRecebida = (protocoloSI.GetStringFromData());
-                        Console.WriteLine("Client " + clientID + ": " + mensagemRecebida);
-
                         string mensagemRecebidadecifrada = DeCifrarTexto(mensagemRecebida);
-                        Console.WriteLine("Client " + clientID + ": " + mensagemRecebidadecifrada);
 
                         ack = protocoloSI.Make(ProtocolSICmdType.ACK);
                         networkStream.Write(ack, 0, ack.Length);
@@ -107,7 +117,7 @@ namespace Server
                             {
                                 if (clientes != this)
                                 {
-                                    string textocifrado = CifrarTexto("Cliente " + clientID + ": " + mensagemRecebidadecifrada);
+                                    string textocifrado = CifrarTexto(mensagemRecebidadecifrada);
                                     clientes.MandarMensagem(textocifrado);
                                 }
                             }
@@ -116,16 +126,14 @@ namespace Server
                         break;
                     // CASO O CLIENTE ENVIO EOT (FIM DE TRANSMISSAO)
                     case ProtocolSICmdType.EOT:
-                        Console.WriteLine("Ending Thread from Client {0}", clientID);
-                        GuardarDados("Um cliente terminou a thread");
+                        Console.WriteLine("Ending Thread from Client{0}", clientID);
+                        Program.GuardarDados("O cliente " + clientID + " terminou a thread");
                         ack = protocoloSI.Make(ProtocolSICmdType.ACK);
                         networkStream.Write(ack, 0, ack.Length);
                         break;
 
                     case ProtocolSICmdType.PUBLIC_KEY:
                         string publickey = protocoloSI.GetStringFromData();
-                        Console.WriteLine("PUBLICKEY :" + publickey);
-
                         // Se ainda não existe uma chave AES gerada no servidor, gerar agora (só uma vez)
                         lock (Program.lockObj)
                         {
@@ -152,8 +160,6 @@ namespace Server
                         aes.Key = Convert.FromBase64String(pk);
                         aes.IV = Convert.FromBase64String(iv);
 
-                        Console.WriteLine(RegistroUserANDPass);
-
                         string RegistroDecifrado = DeCifrarTexto(RegistroUserANDPass);
                         string[] ArrayRegistro = RegistroDecifrado.Split('+');
 
@@ -161,9 +167,6 @@ namespace Server
                         string password = ArrayRegistro[1];
                         byte[] salt = GenerateSalt(SALTSIZE);
                         byte[] hash = GenerateSaltedHash(password, salt);
-
-                        Console.WriteLine(username);
-                        Console.WriteLine(password);
 
                         Register(username, hash, salt);
 
@@ -184,7 +187,7 @@ namespace Server
 
                         string user = ArrayLogin[0];
                         string pass = ArrayLogin[1];
-                                    
+
 
                         if (VerifyLogin(user, pass))
                         {
@@ -198,7 +201,7 @@ namespace Server
                         }
 
 
-                    break;
+                        break;
 
 
                     case ProtocolSICmdType.USER_OPTION_3:
@@ -210,7 +213,7 @@ namespace Server
                         MandarMensagem(nome);
 
 
-                    break;
+                        break;
                 }
 
 
@@ -279,8 +282,7 @@ namespace Server
                 int userExists = (int)checkCmd.ExecuteScalar();
                 if (userExists > 0)
                 {
-                    Console.WriteLine("Utilizador já existe.");
-                    GuardarDados("REGISTO BD - Utilizador já existe");
+                    Program.GuardarDados("REGISTO BD - Utilizador já existe ( " + username + " )");
                     MandarMensagem("erro: user já existe");
                     return;
                 }
@@ -300,12 +302,12 @@ namespace Server
                     throw new Exception("Error while inserting user");
                 }
 
-                GuardarDados("REGISTO BD - User Inserido");
-                MandarMensagem("user inserido com sucesso");
+                Program.GuardarDados("REGISTO BD - User Inserido ( " + username + " )");
+                MandarMensagem("User inserido com sucesso");
             }
             catch (Exception e)
             {
-                GuardarDados("REGISTO BD - Erro ao inserir utilizador: " +  e.Message);
+                Program.GuardarDados("REGISTO BD - Erro ao inserir utilizador: " + e.Message);
                 throw new Exception("Erro ao inserir utilizador: " + e.Message);
             }
         }
@@ -342,7 +344,7 @@ namespace Server
 
                 if (!reader.HasRows)
                 {
-                    GuardarDados("LOGIN BD - Erro ao tentar acessar um user: ");
+                    Program.GuardarDados("LOGIN BD - Erro ao tentar acessar um user ( " + username + " )");
                     throw new Exception("Error while trying to access an user");
                 }
 
@@ -459,35 +461,22 @@ namespace Server
 
                 if (result != null)
                 {
-                    GuardarDados("ENCONTRAR USER BD - : User Encontrado");
+                    Program.GuardarDados("ENCONTRAR USER BD - : User Encontrado ( " + username + " )");
                     return result.ToString();
                 }
                 else
                 {
-                    GuardarDados("ENCONTRAR USER BD - : Cliente não encontrado");
+                    Program.GuardarDados("ENCONTRAR USER BD - : Cliente não encontrado ( " + username + " )");
                     return "Cliente não encontrado";
                 }
             }
             catch (Exception e)
             {
-                GuardarDados("ENCONTRAR USER BD - : Erro ao ir buscar utilizador" + e.Message);
+                Program.GuardarDados("ENCONTRAR USER BD - : Erro ao ir buscar utilizador" + e.Message);
                 throw new Exception("Erro ao ir buscar utilizador: " + e.Message);
             }
         }
 
-        public void GuardarDados(string dados)
-        {
-
-            String LogFilepath = "log.txt";
-
-            StreamWriter originalFileStream = File.AppendText(LogFilepath);
-
-            originalFileStream.WriteLine(dados);
-
-            originalFileStream.Close();
-        }
-
-
-
+    
     }
 }
